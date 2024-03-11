@@ -72,7 +72,7 @@
                 <param name="block_size" type="integer" value="5" label="Odd size of pixel neighborhood for determining the threshold" />
             </when>
         </conditional>
-        <param name="invert_output" type="boolean" checked="false" truevalue="True" falsevalue="False" label="Invert output labels" />
+        <param name="invert_output" type="boolean" checked="false" truevalue="True" falsevalue="False" label="Invert output labels" help="Pixels with values below and above the threshold are usually labeled with the values 0 and 255, or with 255 and 0 if this option is activated." />
     </inputs>
     <outputs>
        <data format="tiff" name="output" from_work_dir="out.tif" />
