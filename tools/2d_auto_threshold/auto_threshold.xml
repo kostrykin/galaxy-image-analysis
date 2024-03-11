@@ -22,6 +22,7 @@
     ./out.tif
     '$th_method.method_id'
     '$th_method.block_size'
+    '$th_method.threshold'
     '$dark_bg'
     ]]>
     </command>
@@ -29,37 +30,49 @@
         <param name="input" type="data" format="tiff,png" label="Input image" />
         <conditional name="th_method">
             <param name="method_id" type="select" label="Thresholding method">
-                <option value="otsu" selected="True">Otsu</option>
-                <option value="li">Li's Minimum Cross Entropy</option>
-                <option value="isodata">Isodata</option>
-                <option value="yen">Yen</option>
-                <option value="loc_gaussian">Adaptive (Gaussian)</option>
-                <option value="loc_median">Adaptive (Median)</option>
-                <option value="loc_mean">Adaptive (Mean)</option>
+                <option value="manual">Manual</option>
+                <option value="otsu" selected="True">Globally adaptive / Otsu</option>
+                <option value="li">Globally adaptive / Li's Minimum Cross Entropy</option>
+                <option value="isodata">Globally adaptive / Isodata</option>
+                <option value="yen">Globally adaptive / Yen</option>
+                <option value="loc_gaussian">Locally adaptive / Gaussian</option>
+                <option value="loc_median">Locally adaptive / Median</option>
+                <option value="loc_mean">Locally adaptive / Mean</option>
             </param>
+            <when value="manual">
+                <param name="threshold" type="float" value="0" label="Threshold value" />
+                <param name="block_size" type="hidden" value="0" />
+            </when>
             <when value="otsu">
+                <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="hidden" value="0" />
             </when>
             <when value="li">
+                <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="hidden" value="0" />
             </when>
             <when value="isodata">
+                <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="hidden" value="0" />
             </when>
             <when value="yen">
+                <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="hidden" value="0" />
             </when>
             <when value="loc_gaussian">
+                <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="integer" value="5" label="Odd size of pixel neighborhood for determining the threshold" />
             </when>
             <when value="loc_median">
+                <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="integer" value="5" label="Odd size of pixel neighborhood for determining the threshold" />
             </when>
             <when value="loc_mean">
+                <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="integer" value="5" label="Odd size of pixel neighborhood for determining the threshold" />
             </when>
         </conditional>
-        <param name="dark_bg" type="boolean" checked="true" truevalue="True" falsevalue="False" label="Dark Background" />
+        <param name="dark_bg" type="boolean" checked="true" truevalue="True" falsevalue="False" label="Dark background" />
     </inputs>
     <outputs>
        <data format="tiff" name="output" from_work_dir="out.tif" />

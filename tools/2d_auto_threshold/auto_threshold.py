@@ -13,20 +13,22 @@ import skimage.util
 import tifffile
 
 th_methods = {
-    'otsu': lambda img_raw, bz: skimage.filters.threshold_otsu(img_raw),
-    'li': lambda img_raw, bz: skimage.filters.threshold_li(img_raw),
-    'yen': lambda img_raw, bz: skimage.filters.threshold_yen(img_raw),
-    'isodata': lambda img_raw, bz: skimage.filters.threshold_isodata(img_raw),
+    'manual': lambda thres, **kwargs: thres,
 
-    'loc_gaussian': lambda img_raw, bz: skimage.filters.threshold_local(img_raw, bz, method='gaussian'),
-    'loc_median': lambda img_raw, bz: skimage.filters.threshold_local(img_raw, bz, method='median'),
-    'loc_mean': lambda img_raw, bz: skimage.filters.threshold_local(img_raw, bz, method='mean')
+    'otsu': lambda img_raw, **kwargs: skimage.filters.threshold_otsu(img_raw),
+    'li': lambda img_raw, **kwargs: skimage.filters.threshold_li(img_raw),
+    'yen': lambda img_raw, **kwargs: skimage.filters.threshold_yen(img_raw),
+    'isodata': lambda img_raw, **kwargs: skimage.filters.threshold_isodata(img_raw),
+
+    'loc_gaussian': lambda img_raw, bz, **kwargs: skimage.filters.threshold_local(img_raw, bz, method='gaussian'),
+    'loc_median': lambda img_raw, bz, **kwargs: skimage.filters.threshold_local(img_raw, bz, method='median'),
+    'loc_mean': lambda img_raw, bz, **kwargs: skimage.filters.threshold_local(img_raw, bz, method='mean')
 }
 
 
-def do_thresholding(in_fn, out_fn, th_method, block_size=5, dark_bg=True):
+def do_thresholding(in_fn, out_fn, th_method, block_size=5, threshold=0, dark_bg=True):
     img = skimage.io.imread(in_fn)
-    th = th_methods[th_method](img, block_size)
+    th = th_methods[th_method](img_raw=img, bz=block_size, thres=threshold)
     if dark_bg:
         res = img > th
     else:
@@ -40,7 +42,8 @@ if __name__ == "__main__":
     parser.add_argument('im_out', help='Path to the output image (TIFF)')
     parser.add_argument('th_method', choices=th_methods.keys(), help='Thresholding method')
     parser.add_argument('block_size', type=int, default=5, help='Odd size of pixel neighborhood for calculating the threshold')
+    parser.add_argument('threshold', type=float, default=0, help='Manual thresholding value')
     parser.add_argument('dark_bg', default=True, type=bool, help='True if background is dark')
     args = parser.parse_args()
 
-    do_thresholding(args.im_in, args.im_out, args.th_method, args.block_size, args.dark_bg)
+    do_thresholding(args.im_in, args.im_out, args.th_method, args.block_size, args.threshold, args.dark_bg)
