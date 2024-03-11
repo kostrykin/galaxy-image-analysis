@@ -83,11 +83,13 @@
         </test>
     </tests>
     <help>
-        Compute image orientation in degrees using OrientationPy.
+        Compute the orientation of 2-D images in degrees using OrientationPy.
 
         OrientationPy is the pythonic successor to the well-loved OrientationJ Fiji Plugin.
-        It is a library that takes in 2D images or 3D volumes and computes the orientation of the greylevels.
+        It is a library that takes in images and computes the orientation of the greylevels.
         A key step is the computation of image gradients, for a number of different techniques is supported.
+
+        For more information on ``--min_energy`` and ``--min_coherency`` see: https://epfl-center-for-imaging.gitlab.io/orientationpy/orientationpy_examples/plot_fibres_2d.html#plot-hsv-composition
     </help>
     <citations>
         <citation type="doi">10.1007/s10237-011-0325-z</citation>
