@@ -16,6 +16,11 @@
     </requirements>
     <inputs>
         <param name="image" type="data" format="png,tiff" label="Input image" />
+        <param argument="--mode" type="select" label="Gradient computation">
+            <option value="finite_difference">Finite differences</option>
+            <option value="gaussian">Gaussian</option>
+            <option value="splines">Splines</option>
+        </param>
     </inputs>
     <outputs>
     </outputs>
