@@ -21,12 +21,14 @@ if __name__ == '__main__':
 
     im = skimage.io.imread(args.input)
     im = skimage.util.img_as_float(im)
+    im = np.squeeze(im)
+    assert im.ndim == 2
 
     Gy, Gx = orientationpy.computeGradient(im, mode=args.mode)
     structureTensor = orientationpy.computeStructureTensor([Gy, Gx], sigma=args.sigma)
     orientations = orientationpy.computeOrientation(structureTensor, computeEnergy=True, computeCoherency=True)
 
-    # This is according to https://bigwww.epfl.ch/demo/orientationj/#dist:
+    # Compute angle according to https://bigwww.epfl.ch/demo/orientationj/#dist:
     mask = np.logical_and(
         orientations['coherency'] >= args.min_coherency,
         orientations['energy'] >= args.min_energy * orientations['energy'].max(),
