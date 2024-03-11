@@ -20,15 +20,15 @@
     python '$__tool_directory__/auto_threshold.py'
     '$input'
     ./out.tif
-    '$th_method'
-    '$block_size'
+    '$th_method.method_id'
+    '$th_method.block_size'
     '$dark_bg'
     ]]>
     </command>
     <inputs>
         <param name="input" type="data" format="tiff,png" label="Input image" />
-        <conditional name="th_method_cond">
-            <param name="th_method" type="select" label="Thresholding method">
+        <conditional name="th_method">
+            <param name="method_id" type="select" label="Thresholding method">
                 <option value="otsu" selected="True">Otsu</option>
                 <option value="li">Li's Minimum Cross Entropy</option>
                 <option value="isodata">Isodata</option>
