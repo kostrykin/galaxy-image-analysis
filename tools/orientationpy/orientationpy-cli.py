@@ -46,5 +46,5 @@ if __name__ == '__main__':
     if args.output_angle_tsv:
         with open(args.output_angle_tsv, 'w') as fp:
             writer = csv.writer(fp, delimiter='\t', lineterminator='\n')
-            writer.writerow('Degrees')
+            writer.writerow('Angle')
             writer.writerow(angle)
