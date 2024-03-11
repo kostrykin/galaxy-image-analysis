@@ -34,9 +34,9 @@
     <inputs>
         <param name="image" type="data" format="png,tiff" label="Input image" />
         <param argument="--mode" type="select" label="Gradient computation">
-            <option value="finite_difference">Finite differences</option>
+            <option value="finite_difference" selected="True">Finite differences</option>
             <option value="gaussian">Gaussian</option>
-            <option value="splines" selected="True">Splines</option>
+            <option value="splines">Splines</option>
         </param>
         <param argument="--sigma" type="float" label="Spatial scale (in pixels)" value="2" />
         <param argument="--min_energy" type="float" label="Minimum energy" value="0.1" min="0" max="1" />
@@ -54,11 +54,11 @@
             <param name="sigma" value="2" />
             <param name="min_energy" value="0.1" />
             <param name="min_coherency" value="0.2" />
-            <param name="bin_size" value="2" />
+            <param name="bin_size" value="0.001" />
             <output name="output_angle_tsv">
                 <assert_contents>
                     <has_line line="Angle" />
-                    <has_line line="-44.95" />
+                    <has_line line="-44.9995" />
                     <has_n_lines n="2" />
                     <has_n_columns n="1" />
                 </assert_contents>
@@ -71,11 +71,11 @@
             <param name="sigma" value="2" />
             <param name="min_energy" value="0.1" />
             <param name="min_coherency" value="0.2" />
-            <param name="bin_size" value="2" />
+            <param name="bin_size" value="0.001" />
             <output name="output_angle_tsv">
                 <assert_contents>
                     <has_line line="Angle" />
-                    <has_line line="45.05" />
+                    <has_line line="45.0005" />
                     <has_n_lines n="2" />
                     <has_n_columns n="1" />
                 </assert_contents>
