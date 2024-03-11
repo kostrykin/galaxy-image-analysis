@@ -41,7 +41,7 @@
         <param argument="--sigma" type="float" label="Spatial scale (in pixels)" value="2" />
         <param argument="--min_energy" type="float" label="Minimum energy" value="0.1" min="0" max="1" />
         <param argument="--min_coherency" type="float" label="Minimum coherency" value="0.2" min="0" max="1" />
-        <param argument="--bin_size" type="float" label="Histogram bin size" value="1" min="0" max="1" help="Governs the precision of the estimation (smaller is better). Must be strictly positive." />
+        <param argument="--max_precision" type="integer" label="Maximum possible precision (in decimals)" value="3" min="0" max="8" help="Governs the histogram bin size (increasing maximum possible precision leads to smaller bin sizes). Note that increasing the maximum possible precision too far may actually decrease the actual precision, because the bin size becomes too small." />
     </inputs>
     <outputs>
         <data format="tsv" name="output_angle_tsv" from_work_dir="output_angle.tsv" />
@@ -54,11 +54,11 @@
             <param name="sigma" value="2" />
             <param name="min_energy" value="0.1" />
             <param name="min_coherency" value="0.2" />
-            <param name="bin_size" value="0.001" />
+            <param name="max_precision" value="1" />
             <output name="output_angle_tsv">
                 <assert_contents>
                     <has_line line="Angle" />
-                    <has_line line="-44.9995" />
+                    <has_line line="-45.0" />
                     <has_n_lines n="2" />
                     <has_n_columns n="1" />
                 </assert_contents>
@@ -71,11 +71,11 @@
             <param name="sigma" value="2" />
             <param name="min_energy" value="0.1" />
             <param name="min_coherency" value="0.2" />
-            <param name="bin_size" value="0.001" />
+            <param name="max_precision" value="1" />
             <output name="output_angle_tsv">
                 <assert_contents>
                     <has_line line="Angle" />
-                    <has_line line="45.0005" />
+                    <has_line line="45.0" />
                     <has_n_lines n="2" />
                     <has_n_columns n="1" />
                 </assert_contents>

@@ -15,7 +15,7 @@ if __name__ == '__main__':
     parser.add_argument('--sigma', type=float, required=True)
     parser.add_argument('--min_coherency', type=float, required=True)
     parser.add_argument('--min_energy', type=float, required=True)
-    parser.add_argument('--bin_size', type=float, required=True)
+    parser.add_argument('--max_precision', type=int, required=True)
     parser.add_argument('--output_angle_tsv', type=str, default=None)
     args = parser.parse_args()
 
@@ -23,8 +23,6 @@ if __name__ == '__main__':
     im = skimage.util.img_as_float(im)
     im = np.squeeze(im)
     assert im.ndim == 2
-
-    assert args.bin_size > 0
 
     Gy, Gx = orientationpy.computeGradient(im, mode=args.mode)
     structureTensor = orientationpy.computeStructureTensor([Gy, Gx], sigma=args.sigma)
@@ -37,14 +35,16 @@ if __name__ == '__main__':
     )
     angles = orientations['theta'][mask]
     weights = orientations['coherency'][mask]
+    bin_size = 1 if args.max_precision == 0 else pow(10, -args.max_precision)
     hist, bin_edges = np.histogram(
         angles,
         range=(-90, +90),
         weights=weights,
-        bins=round(180 / args.bin_size),
+        bins=round(180 / bin_size),
     )
     hidx = np.argmax(hist)
     angle = (bin_edges[hidx] + bin_edges[hidx + 1]) / 2
+    angle = round(angle, args.max_precision)
 
     # Write results
     if args.output_angle_tsv:
