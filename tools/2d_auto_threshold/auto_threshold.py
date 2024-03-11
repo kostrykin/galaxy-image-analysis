@@ -7,6 +7,7 @@ See file LICENSE for detail or copy at https://opensource.org/licenses/MIT
 
 import argparse
 
+import numpy as np
 import skimage.filters
 import skimage.io
 import skimage.util
@@ -26,13 +27,12 @@ th_methods = {
 }
 
 
-def do_thresholding(in_fn, out_fn, th_method, block_size=5, threshold=0, dark_bg=True):
+def do_thresholding(in_fn, out_fn, th_method, block_size=5, threshold=0, invert_output=False):
     img = skimage.io.imread(in_fn)
     th = th_methods[th_method](img_raw=img, bz=block_size, thres=threshold)
-    if dark_bg:
-        res = img > th
-    else:
-        res = img <= th
+    res = img > th
+    if invert_output:
+        res = np.logical_not(res)
     tifffile.imwrite(out_fn, skimage.util.img_as_ubyte(res))
 
 
@@ -43,7 +43,7 @@ if __name__ == "__main__":
     parser.add_argument('th_method', choices=th_methods.keys(), help='Thresholding method')
     parser.add_argument('block_size', type=int, default=5, help='Odd size of pixel neighborhood for calculating the threshold')
     parser.add_argument('threshold', type=float, default=0, help='Manual thresholding value')
-    parser.add_argument('dark_bg', default=True, type=bool, help='True if background is dark')
+    parser.add_argument('invert_output', default=False, type=bool, help='Values below/above the threshold are labeled with 0/255 if False, and with 255/0 otherwise')
     args = parser.parse_args()
 
-    do_thresholding(args.im_in, args.im_out, args.th_method, args.block_size, args.threshold, args.dark_bg)
+    do_thresholding(args.im_in, args.im_out, args.th_method, args.block_size, args.threshold, args.invert_output)
