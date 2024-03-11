@@ -102,6 +102,12 @@
     </tests>
     <help>
         Applies a standard thresholding algorithm to an image.
+
+        The thresholding algorithm automatically determines a threshold value (unless manual thresholding is used).
+        The input image is then thresholded, by assigning white (pixel value 255) to image regions above the determined threshold,
+        and black (pixel value 0) to image regions below or equal to the determined threshold.
+
+        The assignment of black and white to image regions below and above the threshold is inverted, if the corresponding option is set.
     </help>
     <citations>
         <citation type="doi">10.1016/j.jbiotec.2017.07.019</citation>
