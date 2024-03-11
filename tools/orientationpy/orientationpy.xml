@@ -14,15 +14,35 @@
         <requirement type="package" version="0.2.0.4">orientationpy</requirement>
         <requirement type="package" version="0.22.0">scikit-image</requirement>
     </requirements>
+    <command><![CDATA[
+    
+    ## Inputs
+    
+    python '$__tool_directory__/orientationpy-cli.py' '$image'
+    --mode $mode
+    --sigma $sigma
+    --min_energy $min_energy
+    --min_coherency $min_coherency
+    
+    ## Outputs
+    
+    --output_angle_tsv '$output_angle_tsv'
+    
+    ]]>
+    </command>
     <inputs>
         <param name="image" type="data" format="png,tiff" label="Input image" />
         <param argument="--mode" type="select" label="Gradient computation">
             <option value="finite_difference">Finite differences</option>
             <option value="gaussian">Gaussian</option>
-            <option value="splines">Splines</option>
+            <option value="splines" selected="True">Splines</option>
         </param>
+        <param argument="--sigma" type="float" label="Spatial scale (in pixels)" value="2" />
+        <param argument="--min_energy" type="float" label="Minimum energy" value="0.1" min="0" max="1" />
+        <param argument="--min_coherency" type="float" label="Minimum coherency" value="0.2" min="0" max="1" />
     </inputs>
     <outputs>
+        <data format="tsv" name="output_angle_tsv" from_work_dir="output_angle.tsv" />
     </outputs>
     <tests>
     </tests>

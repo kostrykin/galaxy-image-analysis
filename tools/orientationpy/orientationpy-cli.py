@@ -1,0 +1,50 @@
+import argparse
+import csv
+
+import numpy as np
+import orientationpy
+import skimage.io
+import skimage.util
+
+
+if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('input', type=str)
+    parser.add_argument('--mode', type=str, required=True)
+    parser.add_argument('--sigma', type=float, required=True)
+    parser.add_argument('--min_coherency', type=float, required=True)
+    parser.add_argument('--min_energy', type=float, required=True)
+    parser.add_argument('--bin_size', type=int, required=True)
+    parser.add_argument('--output_angle_tsv', type=str, default=None)
+    args = parser.parse_args()
+
+    im = skimage.io.imread(args.input)
+    im = skimage.util.img_as_float(im)
+
+    Gy, Gx = orientationpy.computeGradient(im, mode=args.mode)
+    structureTensor = orientationpy.computeStructureTensor([Gy, Gx], sigma=args.sigma)
+    orientations = orientationpy.computeOrientation(structureTensor, computeEnergy=True, computeCoherency=True)
+
+    # This is according to https://bigwww.epfl.ch/demo/orientationj/#dist:
+    mask = np.logical_and(
+        orientations['coherency'] >= args.min_coherency,
+        orientations['energy'] >= args.min_energy * orientations['energy'].max(),
+    )
+    angles = orientations['theta'][mask]
+    weights = orientations['coherency'][mask]
+    hist, bin_edges = np.histogram(
+        angles,
+        range=(-90, +90),
+        weights=weights,
+        bins=180 / args.bin_size,
+    )
+    hidx = np.argmax(hist)
+    angle = (bin_edges[hidx] + bin_edges[hidx + 1]) / 2
+
+    # Write results
+    if args.output_angle_tsv:
+        with open(args.output_angle_tsv, 'w') as fp:
+            writer = csv.writer(fp, delimiter='\t', lineterminator='\n')
+            writer.writerow('Degrees')
+            writer.writerow(angle)
