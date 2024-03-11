@@ -1,5 +1,9 @@
-<tool id="ip_threshold" name="Threshold image" version="0.0.5-2" profile="20.05">
+<tool id="ip_threshold" name="Threshold image" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.05">
     <description>with scikit-image</description>
+    <macros>
+        <token name="@TOOL_VERSION@">0.0.5</token>
+        <token name="@VERSION_SUFFIX@">2</token>
+    </macros>
     <edam_operations>
         <edam_operation>operation_3443</edam_operation>
     </edam_operations>
@@ -23,16 +27,38 @@
     </command>
     <inputs>
         <param name="input" type="data" format="tiff,png" label="Input image" />
-        <param name="th_method" type="select" label="Thresholding method">
-          <option value="otsu" selected="True">Otsu</option>
-          <option value="li">Li's Minimum Cross Entropy</option>
-          <option value="isodata">Isodata</option>
-          <option value="yen">Yen</option>
-          <option value="loc_gaussian">Adaptive (Gaussian)</option>
-          <option value="loc_median">Adaptive (Median)</option>
-          <option value="loc_mean">Adaptive (Mean)</option>
-        </param>
-        <param name="block_size" type="integer" value="5" label="Odd size of pixel neighborhood for determining the threshold (only valid for adaptive thresholding methods)" />
+        <conditional name="th_method_cond">
+            <param name="th_method" type="select" label="Thresholding method">
+                <option value="otsu" selected="True">Otsu</option>
+                <option value="li">Li's Minimum Cross Entropy</option>
+                <option value="isodata">Isodata</option>
+                <option value="yen">Yen</option>
+                <option value="loc_gaussian">Adaptive (Gaussian)</option>
+                <option value="loc_median">Adaptive (Median)</option>
+                <option value="loc_mean">Adaptive (Mean)</option>
+            </param>
+            <when value="otsu">
+                <param name="block_size" type="hidden" value="0" />
+            </when>
+            <when value="li">
+                <param name="block_size" type="hidden" value="0" />
+            </when>
+            <when value="isodata">
+                <param name="block_size" type="hidden" value="0" />
+            </when>
+            <when value="yen">
+                <param name="block_size" type="hidden" value="0" />
+            </when>
+            <when value="loc_gaussian">
+                <param name="block_size" type="integer" value="5" label="Odd size of pixel neighborhood for determining the threshold" />
+            </when>
+            <when value="loc_median">
+                <param name="block_size" type="integer" value="5" label="Odd size of pixel neighborhood for determining the threshold" />
+            </when>
+            <when value="loc_mean">
+                <param name="block_size" type="integer" value="5" label="Odd size of pixel neighborhood for determining the threshold" />
+            </when>
+        </conditional>
         <param name="dark_bg" type="boolean" checked="true" truevalue="True" falsevalue="False" label="Dark Background" />
     </inputs>
     <outputs>
