@@ -80,17 +80,24 @@
     <tests>
         <test>
             <param name="input" value="sample.tif"/>
-            <output name="output" value="out.tif" ftype="tiff" compare="sim_size"/>
-            <param name="th_method" value="loc_gaussian"/>
+            <output name="output" value="out.tif" ftype="tiff" compare="sim_size" delta="10"/>
+            <param name="method_id" value="loc_gaussian"/>
             <param name="block_size" value="3"/>
             <param name="dark_bg" value="True"/>
         </test>
         <test>
             <param name="input" value="sample.tif"/>
-            <output name="output" value="out2.tif" ftype="tiff" compare="sim_size"/>
-            <param name="th_method" value="otsu"/>
+            <output name="output" value="out2.tif" ftype="tiff" compare="sim_size" delta="10"/>
+            <param name="method_id" value="otsu"/>
             <param name="block_size" value="5"/>
             <param name="dark_bg" value="True"/>
+        </test>
+        <test>
+            <param name="input" value="sample.tif"/>
+            <output name="output" value="out3.tif" ftype="tiff" compare="sim_size" delta="10"/>
+            <param name="method_id" value="manual"/>
+            <param name="threshold" value="64"/>
+            <param name="dark_bg" value="False"/>
         </test>
     </tests>
     <help>
