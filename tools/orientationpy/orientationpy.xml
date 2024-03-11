@@ -23,6 +23,7 @@
     --sigma $sigma
     --min_energy $min_energy
     --min_coherency $min_coherency
+    --bin_size $bin_size
     
     ## Outputs
     
@@ -40,36 +41,41 @@
         <param argument="--sigma" type="float" label="Spatial scale (in pixels)" value="2" />
         <param argument="--min_energy" type="float" label="Minimum energy" value="0.1" min="0" max="1" />
         <param argument="--min_coherency" type="float" label="Minimum coherency" value="0.2" min="0" max="1" />
+        <param argument="--bin_size" type="float" label="Histogram bin size" value="1" min="0" max="1" help="Governs the precision of the estimation (smaller is better). Must be strictly positive." />
     </inputs>
     <outputs>
         <data format="tsv" name="output_angle_tsv" from_work_dir="output_angle.tsv" />
     </outputs>
     <tests>
+        <!-- Test negative angle -->
         <test>
             <param name="image" value="input1.tif" />
             <param name="mode" value="finite_difference" />
             <param name="sigma" value="2" />
             <param name="min_energy" value="0.1" />
             <param name="min_coherency" value="0.2" />
+            <param name="bin_size" value="2" />
             <output name="output_angle_tsv">
                 <assert_contents>
                     <has_line line="Angle" />
-                    <has_line line="45" />
+                    <has_line line="-44.95" />
                     <has_n_lines n="2" />
                     <has_n_columns n="1" />
                 </assert_contents>
             </output>
         </test>
+        <!-- Test positive angle -->
         <test>
             <param name="image" value="input2.tif" />
             <param name="mode" value="finite_difference" />
             <param name="sigma" value="2" />
             <param name="min_energy" value="0.1" />
             <param name="min_coherency" value="0.2" />
+            <param name="bin_size" value="2" />
             <output name="output_angle_tsv">
                 <assert_contents>
                     <has_line line="Angle" />
-                    <has_line line="-45" />
+                    <has_line line="45.05" />
                     <has_n_lines n="2" />
                     <has_n_columns n="1" />
                 </assert_contents>

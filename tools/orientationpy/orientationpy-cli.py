@@ -15,7 +15,7 @@ if __name__ == '__main__':
     parser.add_argument('--sigma', type=float, required=True)
     parser.add_argument('--min_coherency', type=float, required=True)
     parser.add_argument('--min_energy', type=float, required=True)
-    parser.add_argument('--bin_size', type=int, required=True)
+    parser.add_argument('--bin_size', type=float, required=True)
     parser.add_argument('--output_angle_tsv', type=str, default=None)
     args = parser.parse_args()
 
@@ -23,6 +23,8 @@ if __name__ == '__main__':
     im = skimage.util.img_as_float(im)
     im = np.squeeze(im)
     assert im.ndim == 2
+
+    assert args.bin_size > 0
 
     Gy, Gx = orientationpy.computeGradient(im, mode=args.mode)
     structureTensor = orientationpy.computeStructureTensor([Gy, Gx], sigma=args.sigma)
@@ -39,7 +41,7 @@ if __name__ == '__main__':
         angles,
         range=(-90, +90),
         weights=weights,
-        bins=180 / args.bin_size,
+        bins=round(180 / args.bin_size),
     )
     hidx = np.argmax(hist)
     angle = (bin_edges[hidx] + bin_edges[hidx + 1]) / 2
@@ -48,5 +50,5 @@ if __name__ == '__main__':
     if args.output_angle_tsv:
         with open(args.output_angle_tsv, 'w') as fp:
             writer = csv.writer(fp, delimiter='\t', lineterminator='\n')
-            writer.writerow('Angle')
-            writer.writerow(angle)
+            writer.writerow(['Angle'])
+            writer.writerow([angle])
