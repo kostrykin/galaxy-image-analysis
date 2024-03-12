@@ -23,7 +23,7 @@
     --sigma $sigma
     --min_energy $min_energy
     --min_coherency $min_coherency
-    --bin_size $bin_size
+    --max_precision $max_precision
     
     ## Outputs
     
