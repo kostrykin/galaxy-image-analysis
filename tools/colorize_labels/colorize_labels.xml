@@ -29,7 +29,7 @@
     </command>
     <inputs>
         <param name="input" type="data" format="tiff,png" label="Input image (label map)" />
-        <param argument="--radius" type="integer" min="1" value="1" label="Radius of the neighborhood" help="Defines the neighborhood (in pixels) where labels are considered to be adjacent." />
+        <param argument="--radius" type="integer" min="1" value="10" label="Radius of the neighborhood" help="Defines the neighborhood (in pixels) where labels are considered to be adjacent." />
         <param argument="--bg_label" type="integer" value="0" label="Background label" />
         <param argument="--bg_color" type="color" value="#000000" label="Background color"/>
     </inputs>

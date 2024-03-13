@@ -65,7 +65,7 @@ if __name__ == '__main__':
     unique_colors = frozenset(graph_coloring.values())
 
     # Assign colors to nodes based on the greedy coloring
-    graph_color_to_mpl_color = dict(zip(unique_colors, mpl.TABLEAU_COLORS))
+    graph_color_to_mpl_color = dict(zip(unique_colors, mpl.TABLEAU_COLORS.values()))
     node_colors = [graph_color_to_mpl_color[graph_coloring[n]] for n in G.nodes()]
 
     # Render result
