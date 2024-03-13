@@ -24,7 +24,7 @@
     
     ## Outputs
     
-    ./output.tiff
+    ./output.tif
     
     ]]>
     </command>
@@ -37,9 +37,9 @@
     </outputs>
     <tests>
         <test>
-            <param name="input" value="input1.tiff" />
+            <param name="input" value="input1.tif" />
             <param name="bg_label" value="0" />
-            <output name="output" value="output1.tiff" ftype="tiff" compare="sim_size" delta_frac="0.1"/>
+            <output name="output" value="output1.tif" ftype="tiff" compare="sim_size" delta_frac="0.1"/>
         </test>
     </tests>
     <help>
