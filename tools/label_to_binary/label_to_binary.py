@@ -15,4 +15,4 @@ if __name__ == '__main__':
     im = skimage.io.imread(args.input)
     im = (im != args.bg_label)
     im = (im * 255).astype(np.uint8)
-    skimage.io.imwrite(args.output, im)
+    skimage.io.imsave(args.output, im)
