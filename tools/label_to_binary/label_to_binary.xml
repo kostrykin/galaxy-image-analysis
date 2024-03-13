@@ -1,7 +1,7 @@
 <tool id="label_to_binary" name="Convert label map to binary image" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@"> 
-    <description></description>
+    <description>with NumPy</description>
     <macros>
-        <token name="@TOOL_VERSION@">0.1</token>
+        <token name="@TOOL_VERSION@">1.26.4</token>
         <token name="@VERSION_SUFFIX@">0</token>
     </macros>
     <edam_operations>
@@ -11,8 +11,8 @@
         <xref type="bio.tools">galaxy_image_analysis</xref>
     </xrefs>
     <requirements>
-        <requirement type="package" version="0.14.2">scikit-image</requirement> 
-        <requirement type="package" version="1.15.4">numpy</requirement>
+        <requirement type="package" version="1.26.4">numpy</requirement>
+        <requirement type="package" version="0.22.0">scikit-image</requirement>
     </requirements>
     <command><![CDATA[
     
@@ -49,6 +49,6 @@
         and black (pixel value 0) to image regions corresponding to image background (by default, this is label 0).
     </help>
     <citations>
-        <citation type="doi">10.1016/j.jbiotec.2017.07.019</citation>
+        <citation type="doi">10.1038/s41586-020-2649-2</citation>
     </citations>
 </tool>
