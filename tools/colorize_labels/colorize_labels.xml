@@ -44,6 +44,13 @@
             <param name="bg_color" value="#5a5a5a" />
             <output name="output" value="output1.png" ftype="png" compare="sim_size" delta_frac="0.1" />
         </test>
+        <test>
+            <param name="input" value="input2.tif" />
+            <param name="radius" value="10" />
+            <param name="bg_label" value="0" />
+            <param name="bg_color" value="#ffffff" />
+            <output name="output" value="output2.png" ftype="png" compare="sim_size" delta_frac="0.1" />
+        </test>
     </tests>
     <help>
         Colorize a 2-D label map for visualization using greedy coloring.

@@ -27,13 +27,15 @@ def build_label_adjacency_graph(im, radius, bg_label):
         if label == bg_label:
             continue
 
+        G.add_node(label)
+
         cc = (im == label)
         neighborhood = ndi.binary_dilation(cc, selem)
         adjacent_labels = np.unique(im[neighborhood])
 
         for adjacent_label in adjacent_labels:
 
-            if adjacent_label == bg_label or adjacent_label < label:
+            if adjacent_label == bg_label or adjacent_label <= label:
                 continue
 
             G.add_edge(label, adjacent_label)
