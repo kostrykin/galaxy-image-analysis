@@ -9,7 +9,7 @@
     </edam_operations>
     <requirements>
         <requirement type="package" version="3.2.1">networkx</requirement>
-        <requirement type="package" version="1.20">numpy</requirement>
+        <requirement type="package" version="1.22">numpy</requirement>
         <requirement type="package" version="0.18.1">scikit-image</requirement>
     </requirements>
     <command><![CDATA[
