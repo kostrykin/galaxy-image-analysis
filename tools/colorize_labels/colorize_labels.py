@@ -80,3 +80,4 @@ if __name__ == '__main__':
 
     # Write result image
     skimage.io.imsave(args.output, result)
+
