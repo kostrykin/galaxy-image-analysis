@@ -2,7 +2,6 @@ import argparse
 
 import numpy as np
 import skimage.io
-import tifffile
 
 
 if __name__ == '__main__':
@@ -16,4 +15,4 @@ if __name__ == '__main__':
     im = skimage.io.imread(args.input)
     im = (im != args.bg_label)
     im = (im * 255).astype(np.uint8)
-    tifffile.imwrite(args.output, im)
+    skimage.io.imwrite(args.output, im)

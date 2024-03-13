@@ -13,7 +13,6 @@
     <requirements>
         <requirement type="package" version="1.26.4">numpy</requirement>
         <requirement type="package" version="0.18.1">scikit-image</requirement>
-        <requirement type="package" version="2020.10.1">tifffile</requirement>
     </requirements>
     <command><![CDATA[
     
@@ -34,7 +33,7 @@
         <param argument="--bg_label" type="integer" value="0" label="Background label" />
     </inputs>
     <outputs>
-        <data format="tiff" name="output" from_work_dir="output.tiff" />
+        <data format="tiff" name="output" from_work_dir="output.tif" />
     </outputs>
     <tests>
         <test>
