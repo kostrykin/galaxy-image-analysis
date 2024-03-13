@@ -5,8 +5,8 @@ import networkx as nx
 import numpy as np
 import scipy.ndimage as ndi
 import skimage.io
-import skimage.util
 import skimage.morphology as morph
+import skimage.util
 
 
 def color_hex_to_rgb_tuple(hex):
@@ -80,4 +80,3 @@ if __name__ == '__main__':
 
     # Write result image
     skimage.io.imsave(args.output, result)
-
