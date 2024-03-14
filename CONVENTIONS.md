@@ -2,15 +2,15 @@ This document is the attempt to collect some rough rules for tools to follow in 
 
 ## Terminology
 
-**Intensity images.**
-
 **Label maps** are images with pixel-level annotations, usually corresponding to distinct image regions (e.g., objects). We avoid the terms *label image* and *labeled image*, since these can be easily confused with image-level annotations (instead of pixel-level). The labels (pixel values) must uniquely identify the labeled image regions (i.e. labels must be unique, even for non-adjacent image regions). If a label semantically corresponds to the image background, that label should be 0.
 
 **Binary images** are a special case of label maps with only two labels (e.g., image background and image foreground). To facilitate visual perception, the foreground label should correspond to white (value 255 for `uint8` images and value 65535 for `uint16` images), since background corresponds to the label 0, which is black.
 
+**Intensity images** are images which are *not* label maps (and thus neither binary images).
+
 ## File types
 
-Tools with **label map inputs** should accept PNG and TIFF files. If a tool wrapper only supports single-channel 2-D label maps and uses a Python script, the structure of the input should be verified right after loading the image:
+If a tool wrapper only supports single-channel 2-D images and uses a Python script, the structure of the input should be verified right after loading the image:
 
 ```python
 im = skimage.io.imread(args.input)
@@ -18,7 +18,9 @@ im = np.squeeze(im)  # remove axes with length 1
 assert im.ndim == 2
 ```
 
-Tools with **label map outputs** should produce either `uint16` single-channel PNG or `uint16` single-channel TIFF. Using `uint8` instead of `uint16` is also acceptable, if there definetely are no more than 256 different labels. Using `uint8` should be preferred for binary images.
+Tools with **label map inputs** should accept PNG and TIFF files. Tools with **label map outputs** should produce either `uint16` single-channel PNG or `uint16` single-channel TIFF. Using `uint8` instead of `uint16` is also acceptable, if there definetely are no more than 256 different labels. Using `uint8` should be preferred for binary images.
+
+Tools with **intensity image inputs** should accept PNG and TIFF files. Tools with **intensity image outputs** can be any data type and either PNG or TIFF. Image outputs meant for visualization (e.g., segmentation overlays, charts) should be PNG.
 
 ## Future extensions
 
