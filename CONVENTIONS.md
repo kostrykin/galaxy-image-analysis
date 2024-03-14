@@ -20,22 +20,6 @@ assert im.ndim == 2
 
 Tools with **label map outputs** should produce either `uint16` single-channel PNG or `uint16` single-channel TIFF. Using `uint8` instead of `uint16` is also acceptable, if there definetely are no more than 256 different labels. Using `uint8` should be preferred for binary images.
 
-## Help section
-
-All tool outputs should be described in the help section of the tool wrapper. To facilitate this, building block macros for different file types are available, which should be used for consistent documentation:
-
-```xml
-<macros>
-  <import>help.xml</import>
-</macros>
-<help>
-  <expand macro="help/outputs">
-  - <expand macro="help/outputs/label_map">The segmentation result.</expand>
-  - <expand macro="help/outputs/intensity_image">Overlay image.</expand>
-  </expand>
-</help>
-```
-
 ## Future extensions
 
 Below is a list of open questions:
