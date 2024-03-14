@@ -31,7 +31,7 @@ All tool outputs should be described in the help section of the tool wrapper. To
 <help>
   <expand macro="help/outputs">
   - <expand macro="help/outputs/label_map">The segmentation result.</expand>
-  - <expand macro="help/outputs/intensity_image">Overlay of the input image and the segmentation result.</expand>
+  - <expand macro="help/outputs/intensity_image">Overlay image.</expand>
   </expand>
 </help>
 ```
