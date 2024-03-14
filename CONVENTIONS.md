@@ -10,7 +10,7 @@ This document is the attempt to collect some rough rules for tools to follow in 
 
 ## File types
 
-Tools with **label map inputs** should accept PNG and TIFF files. If a tool only supports single-channel 2-D label maps, the structure of the input should be verified right after loading the image:
+Tools with **label map inputs** should accept PNG and TIFF files. If a tool wrapper only supports single-channel 2-D label maps and uses a Python script, the structure of the input should be verified right after loading the image:
 
 ```python
 im = skimage.io.imread(args.input)
