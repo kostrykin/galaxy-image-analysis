@@ -1,10 +1,10 @@
 This document is the attempt to collect some rough rules for tools to follow in this repository, to facilitate consistency and interoperability of our tools. This document is an extension to the [Naming and Annotation Conventions for Tools in the Image Community in Galaxy](https://github.com/elixir-europe/biohackathon-projects-2023/blob/main/16/paper/paper.md#conventions) and compatibility should be maintained. This document is work in progress.
 
-## Types of images
+## Terminology
 
-Intensity images.
+**Intensity images.**
 
-Label maps. Labels must uniquely identify objects (i.e. labels must be unique even if objects are not adjacent).
+**Label maps** are images with pixel-level annotations, usually corresponding to objects. We avoid the terms *label image* and *labeled image*, since these can be easily confused with image-level annotations (instead of pixel-level). The labels (pixel values) must uniquely identify objects (i.e. labels must be unique even if objects are not adjacent).
 
 ## File types
 
