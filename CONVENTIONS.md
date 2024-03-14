@@ -40,8 +40,8 @@ All tool outputs should be described in the help section of the tool wrapper. To
 
 Below is a list of open questions:
 
-- How do we want to cope with multi-channel label maps?
+- **How do we want to cope with multi-channel label maps?** For example, do or can we distinguish RGB labels from multi-channel binary masks, which are sometimes used to represent overlapping objects?
 
-- How can we distinguish multi-channel 2-D images and single-channel 3-D images?
+- How can we distinguish multi-channel 2-D images from single-channel 3-D images?
 
 - How can we make clear to the user, whether a tool requires a 2-D image or also supports 3-D?
