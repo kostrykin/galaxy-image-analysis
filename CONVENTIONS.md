@@ -1,4 +1,4 @@
-This document is the attempt to collect some rough rules for tools to follow in this repository, to facilitate consistency and interoperability of our tools. This document is an extension to the [Naming and Annotation Conventions for Tools in the Image Community in Galaxy](https://github.com/elixir-europe/biohackathon-projects-2023/blob/main/16/paper/paper.md#conventions) and compatibility should be maintained. This document is work in progress.
+This document is the attempt to collect some rough rules for tools to follow in this repository, to facilitate their consistency and interoperability. This document is an extension to the [Naming and Annotation Conventions for Tools in the Image Community in Galaxy](https://github.com/elixir-europe/biohackathon-projects-2023/blob/main/16/paper/paper.md#conventions) and compatibility should be maintained. This document is work in progress.
 
 ## Terminology
 
