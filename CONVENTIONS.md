@@ -6,7 +6,7 @@ This document is the attempt to collect some rough rules for tools to follow in 
 
 **Label maps** are images with pixel-level annotations, usually corresponding to distinct image regions (e.g., objects). We avoid the terms *label image* and *labeled image*, since these can be easily confused with image-level annotations (instead of pixel-level). The labels (pixel values) must uniquely identify the labeled image regions (i.e. labels must be unique, even for non-adjacent image regions). If a label semantically corresponds to the image background, that label should be 0.
 
-**Binary images** are a special case of label maps with only two labels. To facilitate visual perception, the foreground label should correspond to white (value 255 for `uint8` images and value 65535 for `uint16` images), since background corresponds to the label 0, which is black.
+**Binary images** are a special case of label maps with only two labels (e.g., image background and image foreground). To facilitate visual perception, the foreground label should correspond to white (value 255 for `uint8` images and value 65535 for `uint16` images), since background corresponds to the label 0, which is black.
 
 ## File types
 
