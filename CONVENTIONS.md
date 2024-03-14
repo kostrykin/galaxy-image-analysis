@@ -2,9 +2,9 @@ This document is the attempt to collect some rough rules for tools to follow in 
 
 ## Types of images
 
-Intensity images
+Intensity images.
 
-Label maps
+Label maps. Labels must uniquely identify objects (i.e. labels must be unique even if objects are not adjacent).
 
 ## File types
 
