@@ -39,14 +39,22 @@ Tools with **intensity image inputs** should accept PNG and TIFF files. Tools wi
 For testing of **binary image outputs** we recommend using the `mae` metric (mean absolute error). With the default value of `eps` of 0.01, this asserts that at most 1% of the image pixels are labeled differently:
 
 ```xml
-<output name="output" value="out1.tif" ftype="tiff" compare="image_diff" metric="mae">
-    <has_image_n_labels n="2">
+<output name="output" value="output.tiff" ftype="tiff" compare="image_diff" metric="mae">
+    <has_image_n_labels n="2"/>
 </output>
 ```
 
-For testing of non-binary **label map outputs** with interchangeable labels, we recommend using the `iou` metric (one minus the intersection over the union), possibly in conjunction with an assertion to verify that the background is assigned the correct label.
+For testing of non-binary **label map outputs** with interchangeable labels, we recommend using the `iou` metric (one minus the intersection over the union). At the moment it is not possible to *pin* specific labels, for example to verify that the background is assigned the correct label, but this will hopefully be added in the future:
+
+```xml
+<output name="output" value="output.tiff" ftype="tiff" compare="image_diff" metric="iou"/>
+```
 
 For testing of **intensity image outputs** we recommend the `rms` metric (root mean square), because it is very sensitive to large pixel value differences, but tolerates smaller differences.
+
+```xml
+<output name="output" value="output.tiff" ftype="tiff" compare="image_diff" metric="rms"/>
+```
 
 ## Future extensions
 
