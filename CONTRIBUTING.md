@@ -33,7 +33,7 @@ assert im.ndim == 2
 Tools with **label map inputs** should accept PNG and TIFF files. Tools with **label map outputs** should produce either `uint16` single-channel PNG or `uint16` single-channel TIFF. Using `uint8` instead of `uint16` is also acceptable, if there definetely are no more than 256 different labels. Using `uint8` should be preferred for binary images.
 
 > [!NOTE]  
-> It is a common misconception that PNG files must be RGB or RGBA, and that only `uint8` pixel values are supported. For example, the `cv2` module (OpenCV) can be used to create single-channel PNG files, or PNG files with `uint16` pixel values.
+> It is a common misconception that PNG files must be RGB or RGBA, and that only `uint8` pixel values are supported. For example, the `cv2` module (OpenCV) can be used to create single-channel PNG files, or PNG files with `uint16` pixel values. Such files can then be read by `skimage.io.imread` without issues (however, `skimage.io.imwrite` seems not to be able to write such PNG files).
 
 Tools with **intensity image inputs** should accept PNG and TIFF files. Tools with **intensity image outputs** can be any data type and either PNG or TIFF. Image outputs meant for visualization (e.g., segmentation overlays, charts) should be PNG.
 
