@@ -27,7 +27,7 @@
         '$output'
 
         $filter_type
-        $radius
+        $size
 
     ]]></command>
     <inputs>
