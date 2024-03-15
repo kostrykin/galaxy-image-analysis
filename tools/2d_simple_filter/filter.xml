@@ -67,9 +67,33 @@
     <tests>
         <test>
             <param name="input" value="sample.tif" />
-            <output name="output" value="res.tif" ftype="tiff" compare="sim_size"/>
-            <param name="filter_type" value="prewitt" />
-            <param name="radius" value="4" />
+            <output name="output" value="gaussian.tif" ftype="tiff" compare="image_diff" metric="rms"/>
+            <param name="filter" value="gaussian" />
+        </test>
+        <test>
+            <param name="input" value="sample.tif" />
+            <output name="output" value="median.tif" ftype="tiff" compare="image_diff" metric="rms"/>
+            <param name="filter" value="median" />
+        </test>
+        <test>
+            <param name="input" value="sample.tif" />
+            <output name="output" value="prewitt_h.tif" ftype="tiff" compare="image_diff" metric="rms"/>
+            <param name="filter" value="prewitt_h" />
+        </test>
+        <test>
+            <param name="input" value="sample.tif" />
+            <output name="output" value="prewitt_v.tif" ftype="tiff" compare="image_diff" metric="rms"/>
+            <param name="filter" value="prewitt_v" />
+        </test>
+        <test>
+            <param name="input" value="sample.tif" />
+            <output name="output" value="sobel_h.tif" ftype="tiff" compare="image_diff" metric="rms"/>
+            <param name="filter" value="sobel_h" />
+        </test>
+        <test>
+            <param name="input" value="sample.tif" />
+            <output name="output" value="sobel_v.tif" ftype="tiff" compare="image_diff" metric="rms"/>
+            <param name="filter" value="sobel_v" />
         </test>
     </tests>
     <help>
