@@ -29,7 +29,7 @@ th_methods = {
 
 def do_thresholding(in_fn, out_fn, th_method, block_size, offset, threshold, invert_output=False):
     img = skimage.io.imread(in_fn)
-    img = np.queeze(img)
+    img = np.squeeze(img)
     assert img.ndim == 2
 
     th = offset + th_methods[th_method](img_raw=img, bz=block_size, thres=threshold)
