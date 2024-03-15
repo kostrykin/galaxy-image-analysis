@@ -55,37 +55,37 @@
             <when value="otsu">
                 <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="hidden" value="0" />
-                <exapnd macro="inputs/offset" />
+                <expand macro="inputs/offset" />
             </when>
             <when value="li">
                 <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="hidden" value="0" />
-                <exapnd macro="inputs/offset" />
+                <expand macro="inputs/offset" />
             </when>
             <when value="isodata">
                 <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="hidden" value="0" />
-                <exapnd macro="inputs/offset" />
+                <expand macro="inputs/offset" />
             </when>
             <when value="yen">
                 <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="hidden" value="0" />
-                <exapnd macro="inputs/offset" />
+                <expand macro="inputs/offset" />
             </when>
             <when value="loc_gaussian">
                 <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="integer" value="5" label="Odd size of pixel neighborhood for determining the threshold" />
-                <exapnd macro="inputs/offset" />
+                <expand macro="inputs/offset" />
             </when>
             <when value="loc_median">
                 <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="integer" value="5" label="Odd size of pixel neighborhood for determining the threshold" />
-                <exapnd macro="inputs/offset" />
+                <expand macro="inputs/offset" />
             </when>
             <when value="loc_mean">
                 <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="integer" value="5" label="Odd size of pixel neighborhood for determining the threshold" />
-                <exapnd macro="inputs/offset" />
+                <expand macro="inputs/offset" />
             </when>
         </conditional>
         <param name="invert_output" type="boolean" checked="false" truevalue="--invert_output" falsevalue="" label="Invert output labels" help="Pixels are usually assigned the label 0 if the pixel value is below (or equal to) the threshold, and 255 if it is above the threshold. If this option is activated, pixels are assigned the label 255 if the pixel value is below (or equal to) the threshold, and 0 if it is above the threshold." />
