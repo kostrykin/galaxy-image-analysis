@@ -31,6 +31,7 @@
 
     ]]></command>
     <inputs>
+        <param name="input" type="data" format="tiff,png" label="Input image" />
         <conditional name="filter">
             <param name="filter_type" type="select" label="Filter type">
                 <option value="gaussian" selected="True">Gaussian</option>
@@ -58,7 +59,6 @@
             <when value="sobel_v">
                 <param name="size" type="hidden" value="0" />
             </when>
-            <param name="input" type="data" format="tiff,png" label="Input image" />
         </conditional>
     </inputs>
     <outputs>

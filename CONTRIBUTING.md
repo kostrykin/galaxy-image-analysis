@@ -34,6 +34,14 @@ Tools with **label map inputs** should accept PNG and TIFF files. Tools with **l
 
 Tools with **intensity image inputs** should accept PNG and TIFF files. Tools with **intensity image outputs** can be any data type and either PNG or TIFF. Image outputs meant for visualization (e.g., segmentation overlays, charts) should be PNG.
 
+## Testing
+
+For testing of **binary image outputs** we recommend using the `mae` metric (mean absolute error). With the default value of `eps` of 0.01, this asserts that at most 1% of the image pixels are labeled differently.
+
+For testing of non-binary **label map outputs** with interchangeable labels, we recommend using the `iou` metric (one minus the intersection over the union), possibly in conjunction with an assertion to verify that the background is assigned the correct label.
+
+For testing of **intensity image outputs** we recommend the `rms` metric (root mean square), because it is very sensitive to large pixel value differences, but tolerates smaller differences.
+
 ## Future extensions
 
 Below is a list of open questions:
