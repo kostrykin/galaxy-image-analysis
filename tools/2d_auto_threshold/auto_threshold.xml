@@ -1,9 +1,16 @@
 <tool id="ip_threshold" name="Threshold image" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.05">
     <description>with scikit-image</description>
     <macros>
+        <import>bmcv.xml</import>
         <token name="@TOOL_VERSION@">0.18.1</token>
-        <token name="@VERSION_SUFFIX@">1</token>
+        <token name="@VERSION_SUFFIX@">2</token>
+        <xml name="inputs/offset">
+            <param name="offset" type="float" value="0" label="Offset" help="Offset to be added to the automatically determined threshold value. Positive values will increase the threshold (and thus reduce the amount of values above the threshold)." />
+        </xml>
     </macros>
+    <creator>
+        <expand macro="creators/bmcv" />
+    </creator>
     <edam_operations>
         <edam_operation>operation_3443</edam_operation>
     </edam_operations>
@@ -22,6 +29,7 @@
     ./out.tif
     '$th_method.method_id'
     '$th_method.block_size'
+    '$th_method.offset'
     '$th_method.threshold'
     $invert_output
     ]]>
@@ -42,34 +50,42 @@
             <when value="manual">
                 <param name="threshold" type="float" value="0" label="Threshold value" />
                 <param name="block_size" type="hidden" value="0" />
+                <param name="offset" type="hidden" value="0" />
             </when>
             <when value="otsu">
                 <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="hidden" value="0" />
+                <exapnd macro="inputs/offset" />
             </when>
             <when value="li">
                 <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="hidden" value="0" />
+                <exapnd macro="inputs/offset" />
             </when>
             <when value="isodata">
                 <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="hidden" value="0" />
+                <exapnd macro="inputs/offset" />
             </when>
             <when value="yen">
                 <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="hidden" value="0" />
+                <exapnd macro="inputs/offset" />
             </when>
             <when value="loc_gaussian">
                 <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="integer" value="5" label="Odd size of pixel neighborhood for determining the threshold" />
+                <exapnd macro="inputs/offset" />
             </when>
             <when value="loc_median">
                 <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="integer" value="5" label="Odd size of pixel neighborhood for determining the threshold" />
+                <exapnd macro="inputs/offset" />
             </when>
             <when value="loc_mean">
                 <param name="threshold" type="hidden" value="0" />
                 <param name="block_size" type="integer" value="5" label="Odd size of pixel neighborhood for determining the threshold" />
+                <exapnd macro="inputs/offset" />
             </when>
         </conditional>
         <param name="invert_output" type="boolean" checked="false" truevalue="--invert_output" falsevalue="" label="Invert output labels" help="Pixels are usually assigned the label 0 if the pixel value is below (or equal to) the threshold, and 255 if it is above the threshold. If this option is activated, pixels are assigned the label 255 if the pixel value is below (or equal to) the threshold, and 0 if it is above the threshold." />
@@ -80,21 +96,28 @@
     <tests>
         <test>
             <param name="input" value="sample.tif"/>
-            <output name="output" value="out.tif" ftype="tiff" compare="sim_size" delta="10"/>
+            <output name="output" value="out1.tif" ftype="tiff" compare="image_diff" metric="iou"/>
             <param name="method_id" value="loc_gaussian"/>
-            <param name="block_size" value="3"/>
+            <param name="block_size" value="51"/>
             <param name="invert_output" value="False"/>
         </test>
         <test>
             <param name="input" value="sample.tif"/>
-            <output name="output" value="out2.tif" ftype="tiff" compare="sim_size" delta="10"/>
+            <output name="output" value="out2.tif" ftype="tiff" compare="image_diff" metric="iou"/>
+            <param name="method_id" value="loc_gaussian"/>
+            <param name="block_size" value="51"/>
+            <param name="offset" value="1"/>
+            <param name="invert_output" value="False"/>
+        </test>
+        <test>
+            <param name="input" value="sample.tif"/>
+            <output name="output" value="out3.tif" ftype="tiff" compare="image_diff" metric="iou"/>
             <param name="method_id" value="otsu"/>
-            <param name="block_size" value="5"/>
             <param name="invert_output" value="False"/>
         </test>
         <test>
             <param name="input" value="sample.tif"/>
-            <output name="output" value="out3.tif" ftype="tiff" compare="sim_size" delta="10"/>
+            <output name="output" value="out4.tif" ftype="tiff" compare="image_diff" metric="iou"/>
             <param name="method_id" value="manual"/>
             <param name="threshold" value="64"/>
             <param name="invert_output" value="True"/>
