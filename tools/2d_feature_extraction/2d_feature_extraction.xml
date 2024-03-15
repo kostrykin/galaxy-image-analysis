@@ -89,7 +89,7 @@
         <test>
             <param name="input_label" value="input.tiff"/>
             <param name="features" value="select"/>
-            <param name="selected_features" value="--label --area"/>
+            <param name="selected_features" value="--label,--area"/>
             <output name="output" ftype="tabular" value="out.tsv"/>
         </test>
     </tests>
