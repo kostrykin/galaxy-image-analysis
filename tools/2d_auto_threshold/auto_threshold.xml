@@ -94,6 +94,7 @@
        <data format="tiff" name="output" from_work_dir="out.tif" />
     </outputs>
     <tests>
+        <!-- Tests for single-channel images -->
         <test>
             <param name="input" value="sample.tif"/>
             <output name="output" value="out1.tif" ftype="tiff" compare="image_diff" metric="iou"/>
@@ -122,10 +123,14 @@
             <param name="threshold" value="64"/>
             <param name="invert_output" value="True"/>
         </test>
+        <!-- Tests for multi-channel images -->
+        <test expect_failure="true">
+            <param name="input" value="rgb.png"/>
+        </test>
     </tests>
     <help>
 
-        Applies a standard thresholding algorithm to an image.
+        **Applies a standard thresholding algorithm to a 2-D single-channel image. Yields a binary image.**
 
         The thresholding algorithm automatically determines a threshold value (unless manual thresholding is used).
         The input image is then thresholded, by assigning white (pixel value 255) to image regions above the determined threshold,

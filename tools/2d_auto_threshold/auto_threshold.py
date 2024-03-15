@@ -29,10 +29,14 @@ th_methods = {
 
 def do_thresholding(in_fn, out_fn, th_method, block_size, offset, threshold, invert_output=False):
     img = skimage.io.imread(in_fn)
+    img = np.queeze(img)
+    assert img.ndim == 2
+
     th = offset + th_methods[th_method](img_raw=img, bz=block_size, thres=threshold)
     res = img > th
     if invert_output:
         res = np.logical_not(res)
+
     tifffile.imwrite(out_fn, skimage.util.img_as_ubyte(res))
 
 
