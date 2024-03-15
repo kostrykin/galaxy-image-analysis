@@ -35,12 +35,10 @@
             <param name="filter_type" type="select" label="Filter type">
                 <option value="gaussian" selected="True">Gaussian</option>
                 <option value="median">Median</option>
-                <option value="prewitt_x">Prewitt horizontal</option>
-                <option value="prewitt_y">Prewitt vertical</option>
-                <option value="sobel_x">Sobel horizontal</option>
-                <option value="sobel_y">Sobel vertical</option>
-                <option value="scharr_x">Scharr horizontal</option>
-                <option value="scharr_y">Scharr vertical</option>
+                <option value="prewitt_h">Prewitt horizontal</option>
+                <option value="prewitt_v">Prewitt vertical</option>
+                <option value="sobel_h">Sobel horizontal</option>
+                <option value="sobel_v">Sobel vertical</option>
             </param>
             <when value="gaussian">
                 <param name="size" type="float" value="3" min="0.1" label="Sigma" help="The half width of the Gaussian bell (in pixels)." />
@@ -48,22 +46,16 @@
             <when value="median">
                 <param name="size" type="integer" value="3" label="Radius" help="Radius of the neighborhood (in pixels)." />
             </when>
-            <when value="prewitt_x">
+            <when value="prewitt_h">
                 <param name="size" type="hidden" value="0" />
             </when>
-            <when value="prewitt_y">
+            <when value="prewitt_v">
                 <param name="size" type="hidden" value="0" />
             </when>
-            <when value="sobel_x">
+            <when value="sobel_h">
                 <param name="size" type="hidden" value="0" />
             </when>
-            <when value="sobel_y">
-                <param name="size" type="hidden" value="0" />
-            </when>
-            <when value="scharr_x">
-                <param name="size" type="hidden" value="0" />
-            </when>
-            <when value="scharr_y">
+            <when value="sobel_v">
                 <param name="size" type="hidden" value="0" />
             </when>
             <param name="input" type="data" format="tiff,png" label="Input image" />
