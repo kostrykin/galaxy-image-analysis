@@ -97,31 +97,39 @@
         <!-- Tests for single-channel images -->
         <test>
             <param name="input" value="sample.tif"/>
-            <output name="output" value="out1.tif" ftype="tiff" compare="image_diff" metric="mae"/>
             <param name="method_id" value="loc_gaussian"/>
             <param name="block_size" value="51"/>
             <param name="invert_output" value="False"/>
+            <output name="output" value="out1.tif" ftype="tiff" compare="image_diff" metric="mae">
+                <has_image_n_labels n="2"/>
+            </output>
         </test>
         <test>
             <param name="input" value="sample.tif"/>
-            <output name="output" value="out2.tif" ftype="tiff" compare="image_diff" metric="mae"/>
             <param name="method_id" value="loc_gaussian"/>
             <param name="block_size" value="51"/>
             <param name="offset" value="1"/>
             <param name="invert_output" value="False"/>
+            <output name="output" value="out2.tif" ftype="tiff" compare="image_diff" metric="mae">
+                <has_image_n_labels n="2"/>
+            </output>
         </test>
         <test>
             <param name="input" value="sample.tif"/>
-            <output name="output" value="out3.tif" ftype="tiff" compare="image_diff" metric="mae"/>
             <param name="method_id" value="otsu"/>
             <param name="invert_output" value="False"/>
+            <output name="output" value="out3.tif" ftype="tiff" compare="image_diff" metric="mae">
+                <has_image_n_labels n="2"/>
+            </output>
         </test>
         <test>
             <param name="input" value="sample.tif"/>
-            <output name="output" value="out4.tif" ftype="tiff" compare="image_diff" metric="mae"/>
             <param name="method_id" value="manual"/>
             <param name="threshold" value="64"/>
             <param name="invert_output" value="True"/>
+            <output name="output" value="out4.tif" ftype="tiff" compare="image_diff" metric="mae">
+                <has_image_n_labels n="2"/>
+            </output>
         </test>
         <!-- Tests for multi-channel images -->
         <test expect_failure="true">

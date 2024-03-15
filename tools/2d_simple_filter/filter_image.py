@@ -9,10 +9,10 @@ from skimage.morphology import disk
 filters = {
     'gaussian': lambda im, sigma: ndi.gaussian_filter(im, sigma),
     'median': lambda im, radius: ndi.median_filter(im, footprint=disk(radius)),
-    'prewitt_h': lambda im: ndi.prewitt(im, axis=1),
-    'prewitt_v': lambda im: ndi.prewitt(im, axis=0),
-    'sobel_h': lambda im: ndi.sobel(im, axis=1),
-    'sobel_v': lambda im: ndi.sobel(im, axis=0),
+    'prewitt_h': lambda im, *args: ndi.prewitt(im, axis=1),
+    'prewitt_v': lambda im, *args: ndi.prewitt(im, axis=0),
+    'sobel_h': lambda im, *args: ndi.sobel(im, axis=1),
+    'sobel_v': lambda im, *args: ndi.sobel(im, axis=0),
 }
 
 if __name__ == "__main__":
@@ -25,4 +25,4 @@ if __name__ == "__main__":
 
     im = skimage.io.imread(args.input.name)
     res = filters[args.filter](im, args.size)
-    skimage.io.imsave(args.out_file.name, res, plugin='tifffile')
+    skimage.io.imsave(args.output.name, res, plugin='tifffile')
