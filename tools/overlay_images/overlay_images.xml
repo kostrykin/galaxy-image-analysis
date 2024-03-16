@@ -99,7 +99,7 @@
             <param name="show_label" value="--show_label"/>
             <expand macro="tests/intensity_image_diff" name="out_png" value="test3.png" ftype="png"/>
         </test>
-        <test expect_num_outputs="1"><!-- segemtation overlay, 8bit test -->
+        <test expect_num_outputs="1"><!-- segmentation overlay, 8bit test -->
             <param name="im1" value="sample1_uint8.tif"/>
             <param name="im2" value="mask2.tif"/>
             <param name="method" value="seg_contour"/>
@@ -115,7 +115,14 @@
             <param name="color" value="#ff0000"/>
             <expand macro="tests/intensity_image_diff" name="out_png" value="test4.png" ftype="png"/>
         </test>
-        <!-- TODO: Add test for: segmentation overlay, 8bit RGB -->
+        <test expect_num_outputs="1"><!-- segmentation overlay, 8bit RGB test -->
+            <param name="im1" value="sample1_uint8_rgb.png"/>
+            <param name="im2" value="mask2.tif"/>
+            <param name="method" value="seg_contour"/>
+            <param name="thickness" value="2"/>
+            <param name="color" value="#ff0000"/>
+            <expand macro="tests/intensity_image_diff" name="out_png" value="test5.png" ftype="png"/>
+        </test>
     </tests>
     <help><![CDATA[
 
