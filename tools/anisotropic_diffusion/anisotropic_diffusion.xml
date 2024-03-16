@@ -1,7 +1,7 @@
 <tool id="ip_anisotropic_diffusion" name="Apply anisotropic diffusion" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.05"> 
     <description>with MedPy</description>
     <macros>
-        <import>bmcv.xml</import>
+        <import>creators.xml</import>
         <import>tests.xml</import>
         <token name="@TOOL_VERSION@">0.3.0</token>
         <token name="@VERSION_SUFFIX@">0</token>

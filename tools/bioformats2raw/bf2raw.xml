@@ -1,7 +1,7 @@
 <tool id="bf2raw" name="Convert to OME-Zarr" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@">
     <description>with Bioformats</description>
     <macros>
-        <import>bugraoezdemir.xml</import>
+        <import>creators.xml</import>
          <token name="@TOOL_VERSION@">0.7.0</token>
          <token name="@VERSION_SUFFIX@">3</token>
     </macros>
