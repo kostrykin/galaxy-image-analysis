@@ -1,7 +1,7 @@
 <tool id="voronoi_tessellation" name="Compute Voronoi tessellation" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="23.0">
     <description>with scikit-image</description>
     <macros>
-        <import>bmcv.xml</import>
+        <import>creators.xml</import>
         <token name="@TOOL_VERSION@">0.22.0</token>
         <token name="@VERSION_SUFFIX@">1</token>
     </macros>
@@ -53,7 +53,8 @@
     </tests>
     <help>
 
-        This tool computes Voronoi tessellations for labeled images.
+        **Computes Voronoi tessellations for labeled images.**
+
         Voronoi tessellations are also known as Vornoi diagrams, or Dirichlet tessellations.
         Zero labels are treated as image background.
 
