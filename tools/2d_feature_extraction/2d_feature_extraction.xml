@@ -55,7 +55,7 @@
             <when value="all"> </when>
             <when value="select">
                 <param name="selected_features" type="select" label="Available features" multiple="true" display="checkboxes">
-                    <option value="--label">Label from the label image</option>
+                    <option value="--label">Label from the label map</option>
                     <option value="--patches">Patches (requires original image)</option>
                     <option value="--max_intensity">Max Intensity (requires original image)</option>
                     <option value="--mean_intensity">Mean Intensity (requires original image)</option>

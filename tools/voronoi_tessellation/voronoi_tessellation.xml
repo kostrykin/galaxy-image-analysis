@@ -30,7 +30,7 @@
     ]]>
     </command>
     <inputs>
-        <param name="input" type="data" format="png,tiff" label="Labeled image" />
+        <param name="input" type="data" format="png,tiff" label="Input image" help="Must be a label map." />
     </inputs>
     <outputs>
        <data format="tiff" name="result" from_work_dir="result.tiff" />
