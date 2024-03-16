@@ -128,7 +128,9 @@
 
         **Overlays two images for visualization.**
 
-        This tool overlays two image to visualize 1) image blending, 2) colocalization, or 3) a segmentation contours over an image.
+        This tool overlays two image to visualize *linear image blending*, *colocalization*, or *segmentation contours*
+        over an intensity image. For *image blending* and *colocalization*, the input images must be single-channel 2-D
+        images. For *segmentation contours*, the intensity must be a 2-D single-channel or 2-D RGB image.
 
     ]]></help>
     <citations>
