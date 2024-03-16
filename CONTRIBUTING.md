@@ -42,7 +42,7 @@ Tools with **intensity image inputs** should accept PNG and TIFF files. Tools wi
 We recommend using macros for verification of image outputs. The macros are loaded as follows:
 ```xml
 <macros>
-    <import>bmcv.xml</import>
+    <import>tests.xml</import>
 </macros>
 ```
 
