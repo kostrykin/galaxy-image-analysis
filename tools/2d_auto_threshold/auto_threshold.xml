@@ -10,7 +10,7 @@
         </xml>
     </macros>
     <creator>
-        <expand macro="creators/bmcv" />
+        <expand macro="creators/bmcv"/>
     </creator>
     <edam_operations>
         <edam_operation>operation_3443</edam_operation>
