@@ -9,5 +9,10 @@
         <person givenName="Bugra" familyName="Oezdemir"/>
         <yield/>
     </xml>
+
+    <xml name="creators/thawn">
+        <person givenName="Till" familyName="Korten"/>
+        <yield/>
+    </xml>
     
 </macros>
