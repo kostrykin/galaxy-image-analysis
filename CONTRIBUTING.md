@@ -39,14 +39,17 @@ Tools with **intensity image inputs** should accept PNG and TIFF files. Tools wi
 
 ## Testing
 
+We recommend using macros for verification of image outputs. The macros are loaded as follows:
+```xml
+<macros>
+    <import>bmcv.xml</import>
+</macros>
+```
+
 For testing of **binary image outputs** we recommend using the `mae` metric (mean absolute error). With the default value of `eps` of 0.01, this asserts that at most 1% of the image pixels are labeled differently:
 
 ```xml
-<output name="output" value="output.tiff" ftype="tiff" compare="image_diff" metric="mae">
-    <assert_contents>
-        <has_image_n_labels n="2"/>
-    </assert_contents>
-</output>
+<expand macro="tests/binary_image_diff" name="output" value="output.tif" ftype="tiff"/>
 ```
 
 For testing of non-binary **label map outputs** with interchangeable labels, we recommend using the `iou` metric (one minus the intersection over the union). At the moment it is not possible to *pin* specific labels, for example to verify that the background is assigned the correct label, but this will hopefully be added in the future:

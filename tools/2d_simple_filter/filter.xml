@@ -2,6 +2,7 @@
     <description>with scipy</description>
     <macros>
         <import>bmcv.xml</import>
+        <import>tests.xml</import>
         <token name="@TOOL_VERSION@">1.12.0</token>
         <token name="@VERSION_SUFFIX@">0</token>
     </macros>
@@ -68,33 +69,33 @@
     <tests>
         <test>
             <param name="input" value="sample.tif" />
-            <output name="output" value="gaussian.tif" ftype="tiff" compare="image_diff" metric="rms"/>
             <param name="filter_type" value="gaussian" />
+            <expand macro="tests/intensity_image_diff" name="output" value="gaussian.tif" ftype="tiff"/>
         </test>
         <test>
             <param name="input" value="sample.tif" />
-            <output name="output" value="median.tif" ftype="tiff" compare="image_diff" metric="rms"/>
             <param name="filter_type" value="median" />
+            <expand macro="tests/intensity_image_diff" name="output" value="median.tif" ftype="tiff"/>
         </test>
         <test>
             <param name="input" value="sample.tif" />
-            <output name="output" value="prewitt_h.tif" ftype="tiff" compare="image_diff" metric="rms"/>
             <param name="filter_type" value="prewitt_h" />
+            <expand macro="tests/intensity_image_diff" name="output" value="prewitt_h.tif" ftype="tiff"/>
         </test>
         <test>
             <param name="input" value="sample.tif" />
-            <output name="output" value="prewitt_v.tif" ftype="tiff" compare="image_diff" metric="rms"/>
             <param name="filter_type" value="prewitt_v" />
+            <expand macro="tests/intensity_image_diff" name="output" value="prewitt_v.tif" ftype="tiff"/>
         </test>
         <test>
             <param name="input" value="sample.tif" />
-            <output name="output" value="sobel_h.tif" ftype="tiff" compare="image_diff" metric="rms"/>
             <param name="filter_type" value="sobel_h" />
+            <expand macro="tests/intensity_image_diff" name="output" value="sobel_h.tif" ftype="tiff"/>
         </test>
         <test>
             <param name="input" value="sample.tif" />
-            <output name="output" value="sobel_v.tif" ftype="tiff" compare="image_diff" metric="rms"/>
             <param name="filter_type" value="sobel_v" />
+            <expand macro="tests/intensity_image_diff" name="output" value="sobel_v.tif" ftype="tiff"/>
         </test>
     </tests>
     <help>

@@ -1,4 +1,5 @@
 <macros>
+
     <xml
         name="tests/binary_image_diff"
         tokens="name,value,ftype,metric,eps"
@@ -13,4 +14,25 @@
         </output>
 
     </xml>
+
+    <xml
+        name="tests/label_image_diff"
+        tokens="name,value,ftype,metric,eps"
+        token_metric="iou"
+        token_eps="0.01">
+
+        <output name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@"/>
+
+    </xml>
+
+    <xml
+        name="tests/intensity_image_diff"
+        tokens="name,value,ftype,metric,eps"
+        token_metric="rms"
+        token_eps="0.01">
+
+        <output name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@"/>
+
+    </xml>
+
 </macros>
