@@ -43,7 +43,9 @@ For testing of **binary image outputs** we recommend using the `mae` metric (mea
 
 ```xml
 <output name="output" value="output.tiff" ftype="tiff" compare="image_diff" metric="mae">
-    <has_image_n_labels n="2"/>
+    <assert_contents>
+        <has_image_n_labels n="2"/>
+    </assert_contents>
 </output>
 ```
 
