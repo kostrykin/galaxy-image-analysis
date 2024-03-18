@@ -2,8 +2,8 @@
     <description>with Bioformats</description>
     <macros>
         <import>creators.xml</import>
-         <token name="@TOOL_VERSION@">0.7.0</token>
-         <token name="@VERSION_SUFFIX@">3</token>
+        <token name="@TOOL_VERSION@">0.7.0</token>
+        <token name="@VERSION_SUFFIX@">3</token>
     </macros>
     <creator>
         <expand macro="creators/bugraoezdemir"/>
@@ -124,7 +124,7 @@ $bf2raw_params.droptop
     </tests>
     <help>
 
-        **Converts to images to OME-Zarr.**
+        **Converts images to OME-Zarr.**
 
         Bioformats-based tool that converts a wide range of image file formats to the cloud-optimised format
         OME-Zarr following the `OME-NGFF`_ specification.
