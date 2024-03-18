@@ -39,24 +39,28 @@ Tools with **intensity image inputs** should accept PNG and TIFF files. Tools wi
 
 ## Testing
 
-> [!NOTE]
-> The new image-based verifications for Galaxy tool tests https://github.com/galaxyproject/galaxy/pull/17556 and https://github.com/galaxyproject/galaxy/pull/17581 won't be available in Galaxy before 24.1 is released.
-> 
-> Meanwhile, they are already available in the CI of the **galaxy-image-analyis** repostiroy! 🎉 https://github.com/BMCV/galaxy-image-analysis/pull/117
-> 
-> To also use them locally, you need to install the development versions of two Galaxy packages:
-> ```python
-> python -m pip install git+https://git@github.com/galaxyproject/galaxy.git@5c1d045ce7b1e45f85608346baed5455324ee967#subdirectory=packages/util
-> python -m pip install git+https://git@github.com/galaxyproject/galaxy.git@5c1d045ce7b1e45f85608346baed5455324ee967#subdirectory=packages/tool_util
-> ```
-> 
-> The commit [`5c1d045ce7b1e45f85608346baed5455324ee967`](https://github.com/galaxyproject/galaxy/commit/5c1d045ce7b1e45f85608346baed5455324ee967) corresponds to the latest merged bug fixes.
-> 
-> In addition, instead of running `planemo test`, you should use:
-> ```python
-> planemo test --galaxy_source https://github.com/kostrykin/galaxy --galaxy_branch galaxy-image-analysis
-> ```
-> The [galaxy-image-analysis branch](https://github.com/kostrykin/galaxy/tree/galaxy-image-analysis) of the <https://github.com/kostrykin/galaxy> fork is the same as the [23.1 release of Galaxy](https://github.com/galaxyproject/galaxy/tree/release_23.1), plus the support for the image-based verification extensions.
+### Testing infrastructure
+
+The new image-based verifications for Galaxy tool tests https://github.com/galaxyproject/galaxy/pull/17556 and https://github.com/galaxyproject/galaxy/pull/17581 won't be available in Galaxy before 24.1 is released.
+
+Meanwhile, they are already available in the CI of the **galaxy-image-analyis** repostiroy! 🎉 https://github.com/BMCV/galaxy-image-analysis/pull/117
+
+To also use them locally, you need to install the development versions of two Galaxy packages and pillow:
+```python
+python -m pip install git+https://git@github.com/galaxyproject/galaxy.git@5c1d045ce7b1e45f85608346baed5455324ee967#subdirectory=packages/util
+python -m pip install git+https://git@github.com/galaxyproject/galaxy.git@5c1d045ce7b1e45f85608346baed5455324ee967#subdirectory=packages/tool_util
+python -m pip install pillow
+```
+
+The commit [`5c1d045ce7b1e45f85608346baed5455324ee967`](https://github.com/galaxyproject/galaxy/commit/5c1d045ce7b1e45f85608346baed5455324ee967) corresponds to the latest merged bug fixes.
+
+In addition, instead of running `planemo test`, you should use:
+```python
+planemo test --galaxy_source https://github.com/kostrykin/galaxy --galaxy_branch galaxy-image-analysis
+```
+The [galaxy-image-analysis branch](https://github.com/kostrykin/galaxy/tree/galaxy-image-analysis) of the <https://github.com/kostrykin/galaxy> fork is the same as the [23.1 release of Galaxy](https://github.com/galaxyproject/galaxy/tree/release_23.1), plus the support for the image-based verification extensions.
+
+### Writing tests
 
 We recommend using macros for verification of image outputs. The macros are loaded as follows:
 ```xml
@@ -76,10 +80,11 @@ For testing of non-binary **label map outputs** with interchangeable labels, we 
 ```
 At the moment it is not possible to *pin* specific labels, for example to verify that the background is assigned the correct label, but this will hopefully be added in the future.
 
-For testing of **intensity image outputs** we recommend the `rms` metric (root mean square), because it is very sensitive to large pixel value differences, but tolerates smaller differences.
+For testing of **intensity image outputs** we recommend the `rms` metric (root mean square), because it is very sensitive to large pixel value differences, but tolerates smaller differences:
 ```xml
 <expand macro="tests/intensity_image_diff" name="output" value="output.tif" ftype="tiff"/>
 ```
+For `uint8` and `uint16` images, increasing the default value of `eps` to `1.0` should be tolerable, if required.
 
 ## Future extensions
 
