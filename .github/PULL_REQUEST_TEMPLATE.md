@@ -1,11 +1,9 @@
 
 ---
 
-**FOR THE CONTRIBUTOR**
+**FOR THE CONTRIBUTOR — Please fill out if applicable**
 
 Please make sure you have read the [CONTRIBUTING.md](https://github.com/BMCV/galaxy-image-analysis/blob/master/CONTRIBUTING.md) document (last updated: 2024/03/18).
-
-**Please fill out if applicable:**
 
 * [ ] License permits unrestricted use (educational + commercial).
 
