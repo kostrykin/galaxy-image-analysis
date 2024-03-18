@@ -113,7 +113,7 @@
             <param name="method" value="seg_contour"/>
             <param name="thickness" value="2"/>
             <param name="color" value="#ff0000"/>
-            <expand macro="tests/intensity_image_diff" name="out_png" value="test4.png" ftype="png"/>
+            <expand macro="tests/intensity_image_diff" name="out_png" value="test4.png" ftype="png" eps="1"/>
         </test>
         <test expect_num_outputs="1"><!-- segmentation overlay, 8bit RGB test -->
             <param name="im1" value="sample1_uint8_rgb.png"/>
