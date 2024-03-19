@@ -102,6 +102,9 @@
 
         **Applies a standard filter to a single-channel 2-D image.**
 
+        Note that this operation can change the range of the values of the image intensities in the image.
+        This is necessary, for example, to preserve the brightness of the image after filtering.
+
     </help>
     <citations>
        <citation type="doi">10.1016/j.jbiotec.2017.07.019</citation>

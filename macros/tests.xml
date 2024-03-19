@@ -21,7 +21,11 @@
         token_metric="iou"
         token_eps="0.01">
 
-        <output name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@"/>
+        <output name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@">
+            <assert_contents>
+                <yield/>
+            </assert_contents>
+        </output>
 
     </xml>
 
@@ -31,7 +35,11 @@
         token_metric="rms"
         token_eps="0.01">
 
-        <output name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@"/>
+        <output name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@">
+            <assert_contents>
+                <yield/>
+            </assert_contents>
+        </output>
 
     </xml>
 
