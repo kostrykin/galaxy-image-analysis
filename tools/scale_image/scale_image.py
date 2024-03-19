@@ -26,14 +26,10 @@ def scale_image(input_file, output_file, scale, order, antialias):
             scale = [scale] * (im.ndim - 1) + [1]
 
     # Do the scaling
-    res = skimage.transform.rescale(im, scale, order, anti_aliasing=antialias)
+    res = skimage.transform.rescale(im, scale, order, anti_aliasing=antialias, preserve_range=True)
 
-    # Convert `res` to the same dtype as `im`,
-    # it is important to preserve the dtype so that both brightness and range of values is preserved
+    # Preserve the `dtype` so that both brightness and range of values is preserved
     if res.dtype != im.dtype:
-        src_max_value = skimage.util.dtype_limits(res)[1]
-        dst_max_value = skimage.util.dtype_limits(im)[1]
-        res = (res / src_max_value) * dst_max_value
         if np.issubdtype(im.dtype, np.integer):
             res = res.round()
         res = res.astype(im.dtype)
