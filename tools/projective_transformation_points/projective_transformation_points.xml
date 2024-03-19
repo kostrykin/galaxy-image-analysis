@@ -31,7 +31,7 @@
     </command>
     <inputs>
         <param name="input" type="data" format="tabular" label="Point coordinates to be transformed" help="Must be a TSV file." />
-        <param name="tmat" type= "data" format="tabular" label="Transformation matrix" />
+        <param name="tmat" type= "data" format="tabular" label="Transformation matrix" help="Homogeneous transformation matrix (3⨉3)." />
     </inputs>
     <outputs>
        <data format="tabular" name="output" />
