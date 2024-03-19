@@ -41,7 +41,7 @@ Tools with **intensity image inputs** should accept PNG and TIFF files. Tools wi
 
 ### Testing infrastructure
 
-The new image-based verifications for Galaxy tool tests https://github.com/galaxyproject/galaxy/pull/17556 and https://github.com/galaxyproject/galaxy/pull/17581 won't be available in Galaxy before 24.1 is released.
+The support for the new [`image_diff` output verification method](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output) and [assertions for image data](https://docs.galaxyproject.org/en/latest/dev/schema.html#assertions-for-image-data) for Galaxy tool testing probably won't be available in Galaxy before 24.1 is released.
 
 Meanwhile, they are already available in the CI of the **galaxy-image-analyis** repostiroy! 🎉 https://github.com/BMCV/galaxy-image-analysis/pull/117
 
