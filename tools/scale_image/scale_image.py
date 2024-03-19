@@ -21,6 +21,10 @@ def scale_image(input_file, output_file, scale, order, antialias):
     else:
         scale = float(scale)
 
+        # For images with 3 or more axes, the last axis is assumed to correspond to channels
+        if im.ndim >= 3:
+            scale = [scale] * (im.ndim - 1) + [1]
+
     # Do the scaling
     res = skimage.transform.rescale(im, scale, order, anti_aliasing=antialias)
 
