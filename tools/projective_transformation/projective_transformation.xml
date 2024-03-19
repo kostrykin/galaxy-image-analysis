@@ -36,7 +36,7 @@
     <inputs>
         <param name="moving" type="data" format="tiff,png" label="Moving image" help="The image to be transformed." />
         <param name="fixed" type="data" format="tiff,png" label="Fixed image" help="The reference image." />
-        <param name="tmat" type="data" format="tabular" label="Transformation matrix" />
+        <param name="tmat" type="data" format="tabular" label="Transformation matrix" help="Homogeneous transformation matrix (3⨉3)." />
     </inputs>
     <outputs>
         <data name="warped" format_source="moving" metadata_source="moving" from_work_dir="result_image" />
