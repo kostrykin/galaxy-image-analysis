@@ -46,7 +46,7 @@
         <param name="antialias" type="boolean" truevalue="--antialias" falsevalue="" checked="true" label="Enable anti-aliasing" help="This should only be used for down-scaling."/>
     </inputs>
     <outputs>
-        <data format="png" name="output" from_work_dir="output"/>
+        <data format="png" name="output" from_work_dir="output" format_source="input" metadata_source="input"/>
     </outputs>
     <tests>
         <!-- Test PNG, without antialias -->
