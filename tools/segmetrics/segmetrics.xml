@@ -2,7 +2,6 @@
     <description>with SegMetrics</description>
     <macros>
         <import>creators.xml</import>
-        <import>tests.xml</import>
         <token name="@TOOL_VERSION@">1.4</token>
         <token name="@VERSION_SUFFIX@">5</token>
     </macros>
