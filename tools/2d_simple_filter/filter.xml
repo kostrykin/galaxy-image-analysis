@@ -16,7 +16,7 @@
         <xref type="biii">scipy</xref>
     </xrefs>
     <requirements>
-        <requirement type="package" version="1.12.0">scipy</requirement>
+        <requirement type="package" version="@TOOL_VERSION@">scipy</requirement>
         <requirement type="package" version="1.26.4">numpy</requirement>
         <requirement type="package" version="0.22.0">scikit-image</requirement>
         <requirement type="package" version="2024.2.12">tifffile</requirement>

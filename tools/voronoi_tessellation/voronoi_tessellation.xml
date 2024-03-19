@@ -13,9 +13,9 @@
         <xref type="biii">scikit-image</xref>
     </xrefs>
     <requirements>
+        <requirement type="package" version="@TOOL_VERSION@">scikit-image</requirement>
         <requirement type="package" version="1.26.4">numpy</requirement>
         <requirement type="package" version="1.12.0">scipy</requirement>
-        <requirement type="package" version="0.22.0">scikit-image</requirement>
     </requirements>
     <command><![CDATA[
     

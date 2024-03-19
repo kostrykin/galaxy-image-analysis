@@ -20,7 +20,7 @@
         <xref type="biii">scikit-image</xref>
     </xrefs>
     <requirements> 
-        <requirement type="package" version="0.18.1">scikit-image</requirement>
+        <requirement type="package" version="@TOOL_VERSION@">scikit-image</requirement>
         <requirement type="package" version="2020.10.1">tifffile</requirement>
     </requirements>
     <command detect_errors="aggressive">
