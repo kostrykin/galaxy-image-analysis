@@ -45,20 +45,20 @@ The support for the new [`image_diff` output verification method](https://docs.g
 
 Meanwhile, they are already available in the CI of the **galaxy-image-analyis** repostiroy! 🎉 https://github.com/BMCV/galaxy-image-analysis/pull/117
 
-To also use them locally, you need to install the development versions of two Galaxy packages and pillow:
+To also use them locally, you need to install the development versions of two Galaxy packages, pillow, and tifffile:
 ```python
-python -m pip install git+https://git@github.com/galaxyproject/galaxy.git@5c1d045ce7b1e45f85608346baed5455324ee967#subdirectory=packages/util
-python -m pip install git+https://git@github.com/galaxyproject/galaxy.git@5c1d045ce7b1e45f85608346baed5455324ee967#subdirectory=packages/tool_util
-python -m pip install pillow
+python -m pip install git+https://git@github.com/kostrykin/galaxy.git@galaxy-image-analysis#subdirectory=packages/util
+python -m pip install git+https://git@github.com/kostrykin/galaxy.git@galaxy-image-analysis#subdirectory=packages/tool_util
+python -m pip install pillow tifffile
 ```
 
-The commit [`5c1d045ce7b1e45f85608346baed5455324ee967`](https://github.com/galaxyproject/galaxy/commit/5c1d045ce7b1e45f85608346baed5455324ee967) corresponds to the latest merged bug fixes.
+The [galaxy-image-analysis branch](https://github.com/kostrykin/galaxy/tree/galaxy-image-analysis) of the <https://github.com/kostrykin/galaxy> fork is the same as the [23.1 release of Galaxy](https://github.com/galaxyproject/galaxy/tree/release_23.1), plus the support for the image-based verification extensions.
 
 In addition, instead of running `planemo test`, you should use:
 ```python
 planemo test --galaxy_source https://github.com/kostrykin/galaxy --galaxy_branch galaxy-image-analysis
 ```
-The [galaxy-image-analysis branch](https://github.com/kostrykin/galaxy/tree/galaxy-image-analysis) of the <https://github.com/kostrykin/galaxy> fork is the same as the [23.1 release of Galaxy](https://github.com/galaxyproject/galaxy/tree/release_23.1), plus the support for the image-based verification extensions. Linting with `planemo lint` works as usual.
+Linting with `planemo lint` works as usual.
 
 ### Writing tests
 
