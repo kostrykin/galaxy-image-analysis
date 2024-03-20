@@ -93,8 +93,7 @@
 
         The image is rescaled uniformly along all axes, or anistropically if multiple scale factors are given.
 
-        Note that this operation can change the range of the values of the image intensities in the image.
-        This is necessary, for example, to preserve the brightness of the image after scaling.
+        This operation preserves both the brightness of the image, and the range of values.
 
     </help>
     <citations>
