@@ -78,13 +78,13 @@
         <test>
             <param name="input" value="input2_normalized.tiff"/>
             <param name="scale" value="0.5"/>
-            <output name="output" value="normalized.tiff" ftype="tiff" compare="sim_size" delta_frac="0.01"/><!-- Looks like pillow cannot read float TIFFs -->
+            <expand macro="tests/intensity_image_diff" name="output" value="normalized.tiff" ftype="tiff"/>
         </test>
         <!-- Test TIFF, not normalized -->
         <test>
             <param name="input" value="input3_not_normalized.tiff"/>
             <param name="scale" value="0.5"/>
-            <output name="output" value="not_normalized.tiff" ftype="tiff" compare="sim_size" delta_frac="0.01"/><!-- Looks like pillow cannot read float TIFFs -->
+            <expand macro="tests/intensity_image_diff" name="output" value="not_normalized.tiff" ftype="tiff"/>
         </test>
     </tests>
     <help>
