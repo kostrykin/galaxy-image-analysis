@@ -67,15 +67,33 @@
        <data format="tiff" name="output" />
     </outputs> 
     <tests>
+        <!--
+
+            The input file `sample.tif` is an uint8 image with values ranging between 23 and 254,
+            with a mean value of 63.67.
+
+            In the tests below we use assertions in addition to the `image_diff` comparison, to
+            ensure that the range of values is preserved. The motiviation behind this is that the
+            expectation images are usually checked visually, which means that the `image_diff`
+            comparison is likely to ensure that the brightness of the image is preserved, but
+            it's good to double-check the range of values (hence the large value for `eps`).
+
+            This only concerns filters like Gaussians and the median filter.
+
+        -->
         <test>
             <param name="input" value="sample.tif" />
             <param name="filter_type" value="gaussian" />
-            <expand macro="tests/intensity_image_diff" name="output" value="gaussian.tif" ftype="tiff"/>
+            <expand macro="tests/intensity_image_diff" name="output" value="gaussian.tif" ftype="tiff">
+                <has_image_mean_intensity mean_intensity="63.67" eps="10"/>
+            </expand>
         </test>
         <test>
             <param name="input" value="sample.tif" />
             <param name="filter_type" value="median" />
-            <expand macro="tests/intensity_image_diff" name="output" value="median.tif" ftype="tiff"/>
+            <expand macro="tests/intensity_image_diff" name="output" value="median.tif" ftype="tiff">
+                <has_image_mean_intensity mean_intensity="63.67" eps="10"/>
+            </expand>
         </test>
         <test>
             <param name="input" value="sample.tif" />
@@ -102,8 +120,7 @@
 
         **Applies a standard filter to a single-channel 2-D image.**
 
-        Note that this operation can change the range of the values of the image intensities in the image.
-        This is necessary, for example, to preserve the brightness of the image after filtering.
+        Mean filters like the Gaussian filter or the median filter preserve both the brightness of the image, and the range of values.
 
     </help>
     <citations>
