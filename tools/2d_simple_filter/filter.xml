@@ -67,53 +67,61 @@
        <data format="tiff" name="output" />
     </outputs> 
     <tests>
-        <!--
-
-            The input file `sample.tif` is an uint8 image with values ranging between 23 and 254,
-            with a mean value of 63.67.
-
-            In the tests below we use assertions in addition to the `image_diff` comparison, to
-            ensure that the range of values is preserved. The motiviation behind this is that the
-            expectation images are usually checked visually, which means that the `image_diff`
-            comparison is likely to ensure that the brightness of the image is preserved, but
-            it's good to double-check the range of values (hence the large value for `eps`).
-
-            This only concerns filters like Gaussians and the median filter.
-
-        -->
+        <!-- Tests with uint8 TIFF input image -->
         <test>
-            <param name="input" value="sample.tif" />
+            <param name="input" value="input1_uint8.tif" />
             <param name="filter_type" value="gaussian" />
-            <expand macro="tests/intensity_image_diff" name="output" value="gaussian.tif" ftype="tiff">
+            <expand macro="tests/intensity_image_diff" name="output" value="input1_gaussian.tif" ftype="tiff">
+                <!--
+
+                The input file `input1_uint8.tif` has values ranging between 23 and 254, with a mean value of 63.67.
+
+                Below, we use an assertion in addition to the `image_diff` comparison, to ensure that the range of
+                values is preserved. The motiviation behind this is that the expectation images are usually checked
+                visually, which means that the `image_diff` comparison is likely to ensure that the brightness of
+                the image is preserved, thus it's good to double-check the range of values (hence the large value
+                for `eps`). This also concerns the median filter.
+
+                -->
                 <has_image_mean_intensity mean_intensity="63.67" eps="10"/>
             </expand>
         </test>
         <test>
-            <param name="input" value="sample.tif" />
+            <param name="input" value="input1_uint8.tif" />
             <param name="filter_type" value="median" />
-            <expand macro="tests/intensity_image_diff" name="output" value="median.tif" ftype="tiff">
+            <expand macro="tests/intensity_image_diff" name="output" value="input1_median.tif" ftype="tiff">
+                <!-- See note for Gaussian filter above. -->
                 <has_image_mean_intensity mean_intensity="63.67" eps="10"/>
             </expand>
         </test>
         <test>
-            <param name="input" value="sample.tif" />
+            <param name="input" value="input1_uint8.tif" />
             <param name="filter_type" value="prewitt_h" />
-            <expand macro="tests/intensity_image_diff" name="output" value="prewitt_h.tif" ftype="tiff"/>
+            <expand macro="tests/intensity_image_diff" name="output" value="input1_prewitt_h.tif" ftype="tiff"/>
         </test>
         <test>
-            <param name="input" value="sample.tif" />
+            <param name="input" value="input1_uint8.tif" />
             <param name="filter_type" value="prewitt_v" />
-            <expand macro="tests/intensity_image_diff" name="output" value="prewitt_v.tif" ftype="tiff"/>
+            <expand macro="tests/intensity_image_diff" name="output" value="input1_prewitt_v.tif" ftype="tiff"/>
         </test>
         <test>
-            <param name="input" value="sample.tif" />
+            <param name="input" value="input1_uint8.tif" />
             <param name="filter_type" value="sobel_h" />
-            <expand macro="tests/intensity_image_diff" name="output" value="sobel_h.tif" ftype="tiff"/>
+            <expand macro="tests/intensity_image_diff" name="output" value="input1_sobel_h.tif" ftype="tiff"/>
         </test>
         <test>
-            <param name="input" value="sample.tif" />
+            <param name="input" value="input1_uint8.tif" />
             <param name="filter_type" value="sobel_v" />
-            <expand macro="tests/intensity_image_diff" name="output" value="sobel_v.tif" ftype="tiff"/>
+            <expand macro="tests/intensity_image_diff" name="output" value="input1_sobel_v.tif" ftype="tiff"/>
+        </test>
+        <!-- Tests with float TIFF input image -->
+        <test>
+            <param name="input" value="input2_float.tif" />
+            <param name="filter_type" value="gaussian" />
+            <expand macro="tests/intensity_image_diff" name="output" value="input2_gaussian.tif" ftype="tiff">
+                <!-- See note for Gaussian filter above. -->
+                <has_image_mean_intensity mean_intensity="0.25" eps="0.01"/>
+            </expand>
         </test>
     </tests>
     <help>
