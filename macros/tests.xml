@@ -8,9 +8,11 @@
         token_metric="mae"
         token_eps="0.01">
 
-        <output name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@">
+        <output name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@" pin_labels="0">
             <assert_contents>
                 <has_image_n_labels n="2"/>
+                <has_image_mean_object_size labels="0" min="1"/>
+                <has_image_mean_object_size labels="255" min="1"/>
                 <yield/>
             </assert_contents>
         </output>
@@ -23,7 +25,7 @@
         token_metric="iou"
         token_eps="0.01">
 
-        <output name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@">
+        <output name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@" pin_labels="0">
             <assert_contents>
                 <yield/>
             </assert_contents>
@@ -53,9 +55,11 @@
         token_metric="mae"
         token_eps="0.01">
 
-        <element name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@">
+        <element name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@" pin_labels="0">
             <assert_contents>
                 <has_image_n_labels n="2"/>
+                <has_image_mean_object_size labels="0" min="1"/>
+                <has_image_mean_object_size labels="255" min="1"/>
                 <yield/>
             </assert_contents>
         </element>
@@ -68,7 +72,7 @@
         token_metric="iou"
         token_eps="0.01">
 
-        <element name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@">
+        <element name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@" pin_labels="0">
             <assert_contents>
                 <yield/>
             </assert_contents>
