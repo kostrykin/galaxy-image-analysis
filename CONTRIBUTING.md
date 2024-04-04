@@ -79,7 +79,7 @@ For testing of non-binary **label map outputs** with interchangeable labels, we 
 ```xml
 <expand macro="tests/label_image_diff" name="output" value="output.tif" ftype="tiff"/>
 ```
-Label 0 is commonly connotated as the image background, and is not interchangable by default. Use `pin_labels=""` to make it interchangable.
+Label 0 is commonly connotated as the image background, and is not interchangable by default. Use `pin_labels=""` to make it interchangable (see the [documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#id113) for details).
 
 For testing of **intensity image outputs** we recommend the `rms` metric (root mean square), because it is very sensitive to large pixel value differences, but tolerates smaller differences:
 ```xml
