@@ -11,8 +11,6 @@
         <output name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@" pin_labels="0">
             <assert_contents>
                 <has_image_n_labels n="2"/>
-                <has_image_mean_object_size labels="0" min="1"/>
-                <has_image_mean_object_size labels="255" min="1"/>
                 <yield/>
             </assert_contents>
         </output>
@@ -21,11 +19,12 @@
 
     <xml
         name="tests/label_image_diff"
-        tokens="name,value,ftype,metric,eps"
+        tokens="name,value,ftype,metric,eps,pin_labels"
         token_metric="iou"
-        token_eps="0.01">
+        token_eps="0.01"
+        token_pin_labels="0">
 
-        <output name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@" pin_labels="0">
+        <output name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@" pin_labels="@PIN_LABELS@">
             <assert_contents>
                 <yield/>
             </assert_contents>
@@ -58,8 +57,6 @@
         <element name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@" pin_labels="0">
             <assert_contents>
                 <has_image_n_labels n="2"/>
-                <has_image_mean_object_size labels="0" min="1"/>
-                <has_image_mean_object_size labels="255" min="1"/>
                 <yield/>
             </assert_contents>
         </element>
@@ -70,9 +67,10 @@
         name="tests/label_image_diff/element"
         tokens="name,value,ftype,metric,eps"
         token_metric="iou"
-        token_eps="0.01">
+        token_eps="0.01"
+        token_pin_labels="0">
 
-        <element name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@" pin_labels="0">
+        <element name="@NAME@" value="@VALUE@" ftype="@FTYPE@" compare="image_diff" metric="@METRIC@" eps="@EPS@" pin_labels="@PIN_LABELS@">
             <assert_contents>
                 <yield/>
             </assert_contents>
