@@ -43,7 +43,7 @@ if __name__ == '__main__':
     cfg['preprocessing']['crop_volume'] = '[:,:,:]'
     cfg['preprocessing']['filter'] = dict(state=False, type='gaussian', filter_param=1.0)
 
-    cfg['cnn_prediction']['device'] = 'cuda'
+    cfg['cnn_prediction']['device'] = 'cpu'
     cfg['cnn_prediction']['num_workers'] = args.workers
     cfg['cnn_prediction']['model_update'] = False
 
