@@ -34,14 +34,36 @@ else:
         ]]></configfile>
     </configfiles>
     <inputs>
-        <param name="input" type="data" format="tiff,zarr" label="Input image"/>
+        <param name="input" type="data" format="tiff,zarr" label="Input image">
+            <validator type="expression" message="not 3d"><![CDATA[getattr(value.metadata, "depth", None) in (None, '') or int(value.metadata.depth) >= 2]]></validator>
+        </param>
     </inputs>
     <outputs>
         <data format="txt" name="output" from_work_dir="output.txt"/>
     </outputs>
     <tests>
         <test>
-            <param name="input" value="image-02.zarr"/>
+            <param name="input" value="image-02.zarr">
+                <!--
+                <metadata name="depth" value="2"/>
+                -->
+            </param>
+            <output name="output">
+                <assert_contents>
+                    <not_has_text text="foobar"/>
+                </assert_contents>
+            </output>
+        </test>
+        <test>
+            <param name="input" value="input1_uint8.tiff"/>
+            <output name="output">
+                <assert_contents>
+                    <not_has_text text="foobar"/>
+                </assert_contents>
+            </output>
+        </test>
+        <test>
+            <param name="input" value="input4_float16.tiff"/>
             <output name="output">
                 <assert_contents>
                     <not_has_text text="foobar"/>
