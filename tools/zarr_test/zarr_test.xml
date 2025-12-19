@@ -1,0 +1,56 @@
+<tool id="zarr_test" name="Test" version="0.1" profile="20.05">
+    <description></description>
+    <requirements>
+        <requirement type="package" version="0.12.2">ome-zarr</requirement>
+        <requirement type="package" version="2.3.5">numpy</requirement>
+    </requirements>
+    <command detect_errors="aggressive"><![CDATA[
+
+        python '$script'
+
+        '$input'
+
+        >> ./output.txt
+        && cat ./output.txt
+
+    ]]></command>
+    <configfiles>
+        <configfile name="script"><![CDATA[
+
+import ome_zarr.io
+import ome_zarr.reader
+
+if '$input.extension' == 'zarr':
+    input_store = '$input.extra_files_path/$input.metadata.store_root'
+
+    omezarr_store = ome_zarr.io.parse_url(input_store)
+    omezarr_reader = ome_zarr.reader.Reader(omezarr_store)
+    nodes = list(omezarr_reader())
+    print(nodes)
+
+else:
+    print('Not a Zarr')
+
+        ]]></configfile>
+    </configfiles>
+    <inputs>
+        <param name="input" type="data" format="tiff,zarr" label="Input image"/>
+    </inputs>
+    <outputs>
+        <data format="txt" name="output" from_work_dir="output.txt"/>
+    </outputs>
+    <tests>
+        <test>
+            <param name="input" value="image-02.zarr"/>
+            <output name="output">
+                <assert_contents>
+                    <not_has_text text="foobar"/>
+                </assert_contents>
+            </output>
+        </test>
+    </tests>
+    <help>
+    </help>
+    <citations>
+    </citations>
+</tool>

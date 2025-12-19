@@ -1,0 +1,8 @@
+categories:
+  - Imaging
+description: Zarr Test
+long_description: Zarr Test
+name: zarr_test
+owner: imgteam
+homepage_url: https://github.com/bmcv
+remote_repository_url: https://github.com/BMCV/galaxy-image-analysis/tree/master/tools/zarr_test/
