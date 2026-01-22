@@ -1,5 +1,5 @@
 <tool id="highdicom_dicom2text" name="Export DICOM metadata" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="24.01">
-    <expand macro="description"/> 
+    <expand macro="description"/>
     <macros>
         <import>macros.xml</import>
         <import>creators.xml</import>
