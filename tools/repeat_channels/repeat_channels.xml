@@ -2,7 +2,7 @@
     <description>with NumPy</description>
     <macros>
         <import>creators.xml</import>
-        <import>tests.xml</import>
+        <import>tests.xml</import> 
         <token name="@TOOL_VERSION@">1.26.4</token>
         <token name="@VERSION_SUFFIX@">0</token>
     </macros>
