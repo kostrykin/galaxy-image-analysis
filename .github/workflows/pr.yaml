@@ -287,7 +287,9 @@ jobs:
           fi
           python -m gialint --tool_path "$file" 2>gialint.err || failed=1
           if [ -f gialint.err ]; then
+            echo '|'
             sed 's/^/│ /' gialint.err
+            echo '|'
           fi
         done <<< "${{ needs.setup.outputs.tool-list }}"
         exit "$failed"
