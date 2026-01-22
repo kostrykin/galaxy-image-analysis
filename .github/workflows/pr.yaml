@@ -282,7 +282,13 @@ jobs:
         set -o pipefail
         failed=0
         while IFS= read -r file; do
-          python -m gialint --tool_path "$file" 2>&1 || failed=1
+          if [ -f gialint.err ]; then
+            rm gialint.err
+          fi
+          python -m gialint --tool_path "$file" 2>gialint.err || failed=1
+          if [ -f gialint.err ]; then
+            cat gialint.err
+          fi
         done <<< "${{ needs.setup.outputs.tool-list }}"
         exit "$failed"
 
