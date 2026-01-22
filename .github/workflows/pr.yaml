@@ -261,6 +261,21 @@ jobs:
         name: 'File size report'
         path: file_size_report.txt
 
+  gialint:
+    name: Lint GIA
+    needs: setup
+    if: ${{ github.event_name == 'pull_request' && needs.setup.outputs.repository-list != '' }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: gialint
+      run: |
+        echo ${{ needs.setup.outputs.tool-list }}
+        echo "---"
+        echo ${{ needs.setup.outputs.repository-list }}
+
   # Planemo test the changed repositories, each chunk creates an artifact
   # containing HTML and JSON reports for the executed tests
   test:
