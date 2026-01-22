@@ -270,11 +270,19 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
+    - uses: actions/setup-python@v6
+      with:
+        python-version: '3.10' 
     - name: gialint
       run: |
-        echo ${{ needs.setup.outputs.tool-list }}
-        echo "---"
-        echo ${{ needs.setup.outputs.repository-list }}
+        set -o nounset
+        set -o pipefail
+        pip install gialint
+        failed=0
+        while IFS= read -r file; do
+          python -m gialint --tool_path "$file" || failed=1
+        done <<< "${{ needs.setup.outputs.tool-list }}"
+        exit "$failed"
 
   # Planemo test the changed repositories, each chunk creates an artifact
   # containing HTML and JSON reports for the executed tests
