@@ -49,7 +49,7 @@
         <!--
         Required for singularity container. Not required for Docker.
         -->
-        <requirement type="package" version="2026.1.14">imagecodecs</requirement>
+        <requirement type="package" version="2024.12.30">imagecodecs</requirement>
 
     </requirements>
     <command detect_errors="aggressive">
