@@ -1,0 +1,94 @@
+<tool id="pycytominer_consensus" name="Compute consensus profiles" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="23.0">
+    <description>with Pycytominer</description>
+    <macros>
+        <import>macros.xml</import>
+    </macros>
+    <expand macro="header"/>
+    <command detect_errors="exit_code"><![CDATA[
+mkdir pycytominer_output &&
+
+## Convert the input to CSV for pycytominer
+#if $profiles.ext in ["tsv", "tabular"]
+    python '$__tool_directory__/format_converter_csvtsv.py'
+        -i '$profiles'
+        -o 'profiles.csv'
+        -c tsv2csv &&
+#else
+    cp '$profiles' 'profiles.csv' &&
+#end if
+
+## Since the strata are input as integers, they need to be converted in a a comma separated string
+columns_headers=`head -n1 'profiles.csv' | cut -d, -f'$replicate_columns'` &&
+    
+pycytominer consensus
+
+--profiles 'profiles.csv'
+--output_file './pycytominer_output/output.csv'
+--output_type 'csv'
+--operation '$operation'
+--replicate_columns "\$columns_headers" &&
+
+## Convert the result back to TSV for the Galaxy dataset
+python '$__tool_directory__/format_converter_csvtsv.py'
+    -i 'pycytominer_output/output.csv'
+    -o '$output'
+    -c csv2tsv
+    ]]></command>
+    <inputs>
+        <param name="profiles" type="data" format="csv,tsv,tabular" label="Input feature-readouts table" help="Table with features extracted from images, normally after feature selection"/>
+        <param name="replicate_columns" type="data_column" format="csv,tsv,tabular" 
+            label="Column with unique condition"
+            help="Select column with the unique condition, meaning where replicates share all of these values"
+            multiple="true"
+            data_ref="profiles" 
+            use_header_names="true"/>
+        <param name="operation"
+            type="select"
+            label="Reduction operation"
+            help="Operation to apply to the cell-profiling table. &lt;i&gt;Moderated z-score&lt;/i&gt; is recommended for large screens.">
+        <option value="median">Median</option>
+        <option value="mean">Mean</option>
+        <option value="modz">Moderated z-score</option>
+    </param>
+    </inputs>
+    <outputs>
+        <data name="output" format="tabular" label="Pycytominer ${tool.name} on ${on_string}"/>
+    </outputs>
+    <tests>
+        <test>
+        <!-- TEST WITH CSV INPUT -->
+            <param name="profiles" value="05_feature_selected.csv" ftype="csv"/>
+            <param name="replicate_columns" value="1,2,3"/>
+            <param name="operation" value="median"/>
+            <output name="output" file="06_consensus.tsv" ftype="tabular">
+                <assert_contents>
+                    <has_text text="Metadata_treatment"/>
+                    <has_n_lines n="4"/>
+                </assert_contents>
+            </output>
+        </test>
+        <test>
+        <!-- TEST WITH TSV INPUT -->
+            <param name="profiles" value="05_feature_selected.tsv" ftype="tsv"/>
+            <param name="replicate_columns" value="1,2,3"/>
+            <param name="operation" value="median"/>
+            <output name="output" file="06_consensus_2.tsv" ftype="tabular">
+                <assert_contents>
+                    <has_text text="Metadata_treatment"/>
+                    <has_n_lines n="4"/>
+                </assert_contents>
+            </output>
+        </test>
+    </tests>
+    <help><![CDATA[
+
+**Collapses replicate wells into one profile per biological condition.**
+
+The replicate wells are collapsed by the *Reduction operation* across replicates.
+
+Documentation: https://pycytominer.readthedocs.io/en/stable/walkthroughs/pycytominer_cli.html#Step-5:-Consensus
+
+
+    ]]></help>
+    <expand macro="footer"/>
+</tool>

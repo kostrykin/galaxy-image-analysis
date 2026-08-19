@@ -1,0 +1,88 @@
+<tool id="pycytominer_aggregate" name="Aggregate readouts" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="23.0">
+    <description>with Pycytominer</description>
+    <macros>
+        <import>macros.xml</import>
+    </macros>
+    <expand macro="header"/>
+    <command><![CDATA[
+mkdir -p pycytominer_output &&
+
+## Convert the input to CSV for pycytominer
+#if $profiles.ext in ["tsv", "tabular"]
+    python '$__tool_directory__/format_converter_csvtsv.py'
+        -i '$profiles'
+        -o 'profiles.csv'
+        -c tsv2csv &&
+#else
+    cp '$profiles' 'profiles.csv' &&
+#end if
+
+## The strata parameter is a list of column indices; resolve them to header names
+strata_headers=\$(head -n1 'profiles.csv' | cut -d, -f'$strata') &&
+
+pycytominer aggregate
+    --profiles 'profiles.csv'
+    --output_file 'pycytominer_output/output.csv'
+    --output_type 'csv'
+    --strata "\$strata_headers"
+    --operation '$operation' &&
+
+## Convert the result back to TSV for the Galaxy dataset
+python '$__tool_directory__/format_converter_csvtsv.py'
+    -i 'pycytominer_output/output.csv'
+    -o '$output'
+    -c csv2tsv
+    ]]></command>
+    <inputs>
+    <param name="profiles" type="data" format="csv,tsv,tabular" label="Input feature-readouts table" help="Table with features extracted from images"/>
+    <param name="strata" type="data_column" format="csv,tsv,tabular"
+        label="Aggregation columns"
+        help="Select column names to aggregate by (e.g., Metadata_Plate, Metadata_Well)"
+        data_ref="profiles" 
+        multiple="true" 
+        use_header_names="true"/>
+    <param name="operation" type="select" label="Aggregation function">
+        <option value="median" selected="true">Median</option>
+        <option value="mean">Mean</option>
+    </param>
+    </inputs>
+    <outputs>
+        <data name="output" format="tabular" label="Pycytominer ${tool.name} on ${on_string}"/>
+    </outputs>
+    <tests>
+        <test>
+            <!-- TEST WITH TSV INPUT -->
+            <param name="profiles" value="01_single_cells.tsv" ftype="tsv"/>
+            <param name="strata" value="1,2"/>
+            <param name="operation" value="median"/>
+            <output name="output" file="02_aggregate_median.tsv" ftype="tabular">
+                <assert_contents>
+                    <has_text text="Metadata_Well"/>
+                    <has_n_lines n="7"/>
+                </assert_contents>
+            </output>
+        </test>
+        <test>
+            <!-- TEST WITH CSV INPUT -->
+            <param name="profiles" value="01_single_cells.csv" ftype="csv"/>
+            <param name="strata" value="1,2"/>
+            <param name="operation" value="mean"/>
+            <output name="output" file="02_aggregate_mean.tsv" ftype="tabular">
+                <assert_contents>
+                    <has_text text="Metadata_Plate"/>
+                    <has_n_lines n="7"/>
+                </assert_contents>
+            </output>
+        </test>
+    </tests>
+    <help><![CDATA[
+
+**Collapses single-cell readouts (rows) into one representative profile per well.**
+
+The readouts (rows) are collapsed by taking the median (or mean) of each feature across all cells in that well.
+
+Documentation: https://pycytominer.readthedocs.io/en/stable/walkthroughs/pycytominer_cli.html#Step-1:-Aggregate
+
+    ]]></help>
+    <expand macro="footer"/>
+</tool>

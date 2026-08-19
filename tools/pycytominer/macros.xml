@@ -1,0 +1,29 @@
+<macros>
+
+<token name="@TOOL_VERSION@">1.6.1</token>
+    <token name="@VERSION_SUFFIX@">0</token>
+
+    <import>creators.xml</import>
+
+    <xml name="header">
+        <creator>
+            <expand macro="creators/rmassei"/>
+        </creator>
+        <edam_operations>
+            <edam_operation>operation_3443</edam_operation>
+        </edam_operations>
+        <requirements>
+            <requirement type="package" version="1.6.1">pycytominer</requirement>
+        </requirements>
+        <required_files>
+            <include type="literal" path="format_converter_csvtsv.py"/>
+        </required_files>
+    </xml>
+
+    <xml name="footer">
+        <citations>
+            <citation type="doi">10.1186/s13059-023-03019-3</citation>
+        </citations>
+    </xml>
+
+</macros>

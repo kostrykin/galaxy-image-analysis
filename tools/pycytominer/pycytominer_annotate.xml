@@ -1,0 +1,97 @@
+<tool id="pycytominer_annotate" name="Annotate readouts with metadata" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="23.0">
+    <description>with Pycytominer</description>
+    <macros>
+        <import>macros.xml</import>
+    </macros>
+    <expand macro="header"/>
+    <command detect_errors="exit_code"><![CDATA[
+mkdir pycytominer_output &&
+
+## Convert the input and the platemap to CSV for pycytominer
+#if $profiles.ext in ["tsv", "tabular"]
+    python '$__tool_directory__/format_converter_csvtsv.py'
+        -i '$profiles' '$platemap'
+        -o 'profiles.csv' 'platemap.csv'
+        -c tsv2csv &&
+#else
+    cp '$profiles' 'profiles.csv' &&
+    cp '$platemap' 'platemap.csv' &&
+#end if
+
+## Since the profiles and platemat headers are input as integers, they need to be converted in a a string
+columns_headers1=`head -n1 'profiles.csv' | cut -d, -f'$profiles_joiner'` &&
+columns_headers2=`head -n1 'platemap.csv' | cut -d, -f'$platemap_joiner'` &&
+    
+pycytominer annotate
+
+--profiles 'profiles.csv'
+--output_file './pycytominer_output/output.csv'
+--output_type 'csv'
+--platemap 'platemap.csv'
+## "Metadata_" need to be add in front of the platemap header name to be read as input
+--join_on "Metadata_\$columns_headers2, \$columns_headers1" &&
+
+## Convert the result back to TSV for the Galaxy dataset
+python '$__tool_directory__/format_converter_csvtsv.py'
+    -i 'pycytominer_output/output.csv'
+    -o '$output'
+    -c csv2tsv
+    ]]></command>
+    <inputs>
+        <param name="profiles" type="data" format="csv,tsv,tabular" label="Input feature-readouts table" help= "Table with features extracted from images"/>
+        <param name="profiles_joiner" type="data_column" format="csv,tsv,tabular" 
+            label="Column describing the wells in the feature-readouts table"
+            help="Column with well values in the cell-profiling table (e.g., Metadata_Well)"
+            data_ref="profiles" 
+            use_header_names="true" />
+        <param name="platemap" type="data" format="csv,tsv,tabular" label="Input platemap table" help="Table with plate map information such a treatment, cell line, and concentration tested"/>
+        <param name="platemap_joiner" type="data_column" format="csv,tsv,tabular" 
+            label="Column describing the wells in the platemap"
+            help="Column with well values in the platemap (well_position)"
+            data_ref="platemap" 
+            use_header_names="true"/>
+    </inputs>
+    <outputs>
+        <data name="output" format="tabular" label="Pycytominer ${tool.name} on ${on_string}"/>
+    </outputs>
+    <tests>
+        <test>
+            <!-- TEST WITH CSV INPUT -->
+            <param name="profiles" value="01_single_cells.csv" ftype="csv"/>
+            <param name="platemap" value="01_platemap.csv" ftype="csv"/>
+            <param name="profiles_joiner" value="2"/>
+            <param name="platemap_joiner" value="1"/>
+            <output name="output" file="03_annotate_plate.tsv" ftype="tabular">
+                <assert_contents>
+                    <has_text text="Metadata_Well"/>
+                    <has_text text="Metadata_treatment"/>
+                    <has_n_columns n="18"/>
+                </assert_contents>
+            </output>
+        </test>
+            <test>
+            <!-- TEST WITH TSV INPUT -->
+            <param name="profiles" value="01_single_cells.tsv" ftype="tsv"/>
+            <param name="platemap" value="01_platemap.tsv" ftype="tsv"/>
+            <param name="profiles_joiner" value="2"/>
+            <param name="platemap_joiner" value="1"/>
+            <output name="output" file="03_annotate_plate.tsv" ftype="tabular">
+                <assert_contents>
+                    <has_text text="Metadata_Well"/>
+                    <has_text text="Metadata_treatment"/>
+                    <has_n_columns n="18"/>
+                </assert_contents>
+            </output>
+        </test>
+    </tests>
+    <help><![CDATA[
+
+**Joins a metadata file (plate map) onto the well profiles, adding columns such as treatment, cell line, and concentration.**
+
+The plate map is a CSV (or any tabular format) where each row describes one well.
+
+Documentation: https://pycytominer.readthedocs.io/en/stable/walkthroughs/pycytominer_cli.html#Step-2:-Annotate
+
+    ]]></help>
+    <expand macro="footer"/>
+</tool>
